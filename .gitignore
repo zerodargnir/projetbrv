@@ -1,0 +1,31 @@
+# Build artifacts (régénérables)
+server/build/
+**/target/
+**/out/
+**/vcpkg_installed/
+*.obj
+*.pdb
+*.ilk
+*.exp
+
+# Assets du jeu (trop gros pour git — cf. 21900.zip du save brv v5)
+server/deploy/game_content/
+*.zip
+21900.zip
+assets.zip
+
+# Logs / dumps / temporaires
+server/deploy/log/
+crashdumps/
+*.dmp
+*.log
+_*.png
+startup_test.log
+
+# Gros binaires clients (utiliser Git LFS si vraiment besoin de versionner)
+# client-appx/*.appx
+
+# Divers
+.vs/
+.DS_Store
+Thumbs.db

@@ -1,0 +1,2466 @@
+<title>Brave Frontier — Missions jouables</title>
+<style>
+:root {
+  --bg:#14121f; --surface:#1d1a2b; --surface-2:#262236; --border:#332f47;
+  --text:#ece9f6; --muted:#9b94b1; --gold:#e2b445; --gold-dim:#b98f34;
+  --shadow:0 1px 0 rgba(255,255,255,.03), 0 8px 24px rgba(0,0,0,.35);
+  --serif:"Iowan Old Style","Palatino Linotype",Palatino,Georgia,serif;
+  --sans:system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;
+  --mono:"Cascadia Code","SFMono-Regular",Consolas,"Liberation Mono",monospace;
+}
+@media (prefers-color-scheme: light) {
+  :root { --bg:#f4f0e7; --surface:#fffdf8; --surface-2:#ece5d7; --border:#e0d7c5;
+    --text:#241f2e; --muted:#6c6478; --gold:#9c6f16; --gold-dim:#7f5a12;
+    --shadow:0 1px 0 rgba(255,255,255,.6), 0 6px 18px rgba(60,45,20,.10); }
+}
+:root[data-theme="dark"] { --bg:#14121f; --surface:#1d1a2b; --surface-2:#262236; --border:#332f47;
+  --text:#ece9f6; --muted:#9b94b1; --gold:#e2b445; --gold-dim:#b98f34;
+  --shadow:0 1px 0 rgba(255,255,255,.03), 0 8px 24px rgba(0,0,0,.35); }
+:root[data-theme="light"] { --bg:#f4f0e7; --surface:#fffdf8; --surface-2:#ece5d7; --border:#e0d7c5;
+  --text:#241f2e; --muted:#6c6478; --gold:#9c6f16; --gold-dim:#7f5a12;
+  --shadow:0 1px 0 rgba(255,255,255,.6), 0 6px 18px rgba(60,45,20,.10); }
+
+* { box-sizing:border-box; }
+body { margin:0; background:var(--bg); color:var(--text); font-family:var(--sans);
+  line-height:1.5; -webkit-font-smoothing:antialiased; }
+.wrap { max-width:1120px; margin:0 auto; padding:0 20px 72px; }
+
+header.top { position:sticky; top:0; z-index:10; background:color-mix(in srgb,var(--bg) 88%,transparent);
+  backdrop-filter:blur(10px); border-bottom:1px solid var(--border); }
+.top-in { max-width:1120px; margin:0 auto; padding:18px 20px; display:flex; flex-wrap:wrap;
+  align-items:baseline; gap:8px 18px; }
+.brand { font-family:var(--serif); font-size:26px; font-weight:700; letter-spacing:.2px;
+  color:var(--text); margin:0; text-wrap:balance; }
+.brand b { color:var(--gold); font-weight:700; }
+.tagline { color:var(--muted); font-size:13.5px; }
+.summary { display:flex; gap:22px; margin-left:auto; align-items:baseline; }
+.sm { display:flex; flex-direction:column; align-items:flex-end; line-height:1.15; }
+.sm b { font-size:19px; font-variant-numeric:tabular-nums; color:var(--gold); }
+.sm span { font-size:11px; text-transform:uppercase; letter-spacing:.08em; color:var(--muted); }
+.searchbar { width:100%; margin-top:14px; position:relative; }
+.searchbar input { width:100%; padding:11px 14px 11px 38px; border-radius:10px; font-size:15px;
+  background:var(--surface); border:1px solid var(--border); color:var(--text); font-family:var(--sans); }
+.searchbar input:focus { outline:2px solid var(--gold); outline-offset:1px; border-color:var(--gold); }
+.searchbar svg { position:absolute; left:12px; top:50%; transform:translateY(-50%); color:var(--muted); }
+.count-line { color:var(--muted); font-size:13px; margin:10px 2px 0; }
+
+.zone { margin-top:34px; }
+.z-head { display:flex; align-items:center; gap:10px; padding-bottom:10px;
+  border-bottom:1px solid var(--border); margin-bottom:16px; }
+.z-head h2 { font-family:var(--serif); font-size:20px; font-weight:700; margin:0; }
+.z-count { font-size:12px; color:var(--gold); background:color-mix(in srgb,var(--gold) 14%,transparent);
+  border:1px solid color-mix(in srgb,var(--gold) 34%,transparent); padding:1px 9px; border-radius:99px;
+  font-variant-numeric:tabular-nums; }
+
+.grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(280px,1fr)); gap:14px; }
+.mission { background:var(--surface); border:1px solid var(--border); border-radius:12px;
+  padding:14px 15px 13px; box-shadow:var(--shadow); display:flex; flex-direction:column; gap:10px; }
+.m-head { display:flex; align-items:baseline; justify-content:space-between; gap:8px; }
+.m-name { font-size:15.5px; font-weight:650; margin:0; text-wrap:balance; }
+.m-id { font-family:var(--mono); font-size:11.5px; color:var(--muted); white-space:nowrap; }
+.m-stats { display:flex; gap:7px; flex-wrap:wrap; }
+.stat { font-size:12px; color:var(--muted); background:var(--surface-2); border:1px solid var(--border);
+  padding:2px 8px; border-radius:7px; }
+.stat b { color:var(--text); font-variant-numeric:tabular-nums; }
+.stat.energy b { color:var(--gold-dim); }
+.foes { display:flex; flex-wrap:wrap; gap:5px; }
+.foe { font-size:11px; color:var(--muted); background:transparent; border:1px solid var(--border);
+  padding:1px 7px; border-radius:99px; }
+.foe.more { color:var(--gold-dim); border-color:color-mix(in srgb,var(--gold) 30%,transparent); }
+
+.empty { display:none; color:var(--muted); text-align:center; padding:60px 0; font-size:15px; }
+footer { margin-top:48px; color:var(--muted); font-size:12.5px; text-align:center; }
+</style>
+
+<header class="top">
+  <div class="top-in">
+    <h1 class="brand">Brave&nbsp;Frontier — <b>Missions jouables</b></h1>
+    <span class="tagline">recréées à l'identique (ennemis · vagues · stats · loot)</span>
+    <div class="summary">
+      <div class="sm"><b>204</b><span>missions</span></div>
+      <div class="sm"><b>32</b><span>zones</span></div>
+      <div class="sm"><b>1616</b><span>vagues</span></div>
+      <div class="sm"><b>4997</b><span>ennemis</span></div>
+    </div>
+  </div>
+  <div class="top-in" style="padding-top:0">
+    <div class="searchbar">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="m21 21-4.3-4.3"/></svg>
+      <input id="q" type="search" placeholder="Rechercher une mission, une zone ou un ennemi (ex: Vargas, Mistral, Metal…)" autocomplete="off" aria-label="Rechercher">
+    </div>
+  </div>
+</header>
+
+<div class="wrap">
+  <p class="count-line" id="count"></p>
+  <section class="zone" data-zone="mistral">
+      <div class="z-head"><h2>Mistral</h2><span class="z-count">18</span></div>
+      <div class="grid"><article class="mission" data-s="basics of battle mistral 1 mossy sparky king mossy">
+          <header class="m-head">
+            <h3 class="m-name">Basics of Battle</h3>
+            <span class="m-id">#1</span>
+          </header>
+          <div class="m-stats">
+            <span class="stat" title="Vagues"><b>3</b> vagues</span>
+            <span class="stat" title="Ennemis au total"><b>4</b> ennemis</span>
+            <span class="stat energy" title="Énergie"><b>—</b> én.</span>
+          </div>
+          <div class="foes"><span class="foe">Mossy</span><span class="foe">Sparky</span><span class="foe">King Mossy</span><span class="foe more">+1</span></div>
+        </article><article class="mission" data-s="element &amp; skill mistral 2 squirty sparky mossy burny skeleton">
+          <header class="m-head">
+            <h3 class="m-name">Element &amp; Skill</h3>
+            <span class="m-id">#2</span>
+          </header>
+          <div class="m-stats">
+            <span class="stat" title="Vagues"><b>3</b> vagues</span>
+            <span class="stat" title="Ennemis au total"><b>7</b> ennemis</span>
+            <span class="stat energy" title="Énergie"><b>—</b> én.</span>
+          </div>
+          <div class="foes"><span class="foe">Squirty</span><span class="foe">Sparky</span><span class="foe">Mossy</span><span class="foe">Burny</span><span class="foe">Skeleton</span><span class="foe more">+2</span></div>
+        </article><article class="mission" data-s="start of adventure mistral 10 mossy sparky squirty gloomy burny king sparky">
+          <header class="m-head">
+            <h3 class="m-name">Start of Adventure</h3>
+            <span class="m-id">#10</span>
+          </header>
+          <div class="m-stats">
+            <span class="stat" title="Vagues"><b>5</b> vagues</span>
+            <span class="stat" title="Ennemis au total"><b>11</b> ennemis</span>
+            <span class="stat energy" title="Énergie"><b>3</b> én.</span>
+          </div>
+          <div class="foes"><span class="foe">Mossy</span><span class="foe">Sparky</span><span class="foe">Squirty</span><span class="foe">Gloomy</span><span class="foe">Burny</span><span class="foe">King Sparky</span><span class="foe more">+5</span></div>
+        </article><article class="mission" data-s="monsters of the prairie mistral 11 merman burny glowy goblin squirty king glowy">
+          <header class="m-head">
+            <h3 class="m-name">Monsters of the Prairie</h3>
+            <span class="m-id">#11</span>
+          </header>
+          <div class="m-stats">
+            <span class="stat" title="Vagues"><b>5</b> vagues</span>
+            <span class="stat" title="Ennemis au total"><b>9</b> ennemis</span>
+            <span class="stat energy" title="Énergie"><b>3</b> én.</span>
+          </div>
+          <div class="foes"><span class="foe">Merman</span><span class="foe">Burny</span><span class="foe">Glowy</span><span class="foe">Goblin</span><span class="foe">Squirty</span><span class="foe">King Glowy</span><span class="foe more">+3</span></div>
+        </article><article class="mission" data-s="cave of dancing flames mistral 20 burny goblin fire nymph thief leon king burny">
+          <header class="m-head">
+            <h3 class="m-name">Cave of Dancing Flames</h3>
+            <span class="m-id">#20</span>
+          </header>
+          <div class="m-stats">
+            <span class="stat" title="Vagues"><b>5</b> vagues</span>
+            <span class="stat" title="Ennemis au total"><b>11</b> ennemis</span>
+            <span class="stat energy" title="Énergie"><b>3</b> én.</span>
+          </div>
+          <div class="foes"><span class="foe">Burny</span><span class="foe">Goblin</span><span class="foe">Fire Nymph</span><span class="foe">Thief Leon</span><span class="foe">King Burny</span><span class="foe more">+6</span></div>
+        </article><article class="mission" data-s="wielder of the fire mistral 21 goblin burny warlock liza">
+          <header class="m-head">
+            <h3 class="m-name">Wielder of the Fire</h3>
+            <span class="m-id">#21</span>
+          </header>
+          <div class="m-stats">
+            <span class="stat" title="Vagues"><b>5</b> vagues</span>
+            <span class="stat" title="Ennemis au total"><b>14</b> ennemis</span>
+            <span class="stat energy" title="Énergie"><b>3</b> én.</span>
+          </div>
+          <div class="foes"><span class="foe">Goblin</span><span class="foe">Burny</span><span class="foe">Warlock Liza</span><span class="foe more">+11</span></div>
+        </article><article class="mission" data-s="breath freezing snowfields mistral 30 squirty merman pirate verica king squirty">
+          <header class="m-head">
+            <h3 class="m-name">Breath Freezing Snowfields</h3>
+            <span class="m-id">#30</span>
+          </header>
+          <div class="m-stats">
+            <span class="stat" title="Vagues"><b>5</b> vagues</span>
+            <span class="stat" title="Ennemis au total"><b>11</b> ennemis</span>
+            <span class="stat energy" title="Énergie"><b>3</b> én.</span>
+          </div>
+          <div class="foes"><span class="foe">Squirty</span><span class="foe">Merman</span><span class="foe">Pirate Verica</span><span class="foe">King Squirty</span><span class="foe more">+7</span></div>
+        </article><article class="mission" data-s="manipulator of the water mistral 31 squirty merman water nymph healer merith">
+          <header class="m-head">
+            <h3 class="m-name">Manipulator of the Water</h3>
+            <span class="m-id">#31</span>
+          </header>
+          <div class="m-stats">
+            <span class="stat" title="Vagues"><b>5</b> vagues</span>
+            <span class="stat" title="Ennemis au total"><b>10</b> ennemis</span>
+            <span class="stat energy" title="Énergie"><b>3</b> én.</span>
+          </div>
+          <div class="foes"><span class="foe">Squirty</span><span class="foe">Merman</span><span class="foe">Water Nymph</span><span class="foe">Healer Merith</span><span class="foe more">+6</span></div>
+        </article><article class="mission" data-s="shadowy forests mistral 40 mossy mandragora king mossy">
+          <header class="m-head">
+            <h3 class="m-name">Shadowy Forests</h3>
+            <span class="m-id">#40</span>
+          </header>
+          <div class="m-stats">
+            <span class="stat" title="Vagues"><b>5</b> vagues</span>
+            <span class="stat" title="Ennemis au total"><b>10</b> ennemis</span>
+            <span class="stat energy" title="Énergie"><b>3</b> én.</span>
+          </div>
+          <div class="foes"><span class="foe">Mossy</span><span class="foe">Mandragora</span><span class="foe">King Mossy</span><span class="foe more">+7</span></div>
+        </article><article class="mission" data-s="puppeteer of the trees mistral 41 mandragora mossy time mage claris">
+          <header class="m-head">
+            <h3 class="m-name">Puppeteer of the Trees</h3>
+            <span class="m-id">#41</span>
+          </header>
+          <div class="m-stats">
+            <span class="stat" title="Vagues"><b>5</b> vagues</span>
+            <span class="stat" title="Ennemis au total"><b>13</b> ennemis</span>
+            <span class="stat energy" title="Énergie"><b>3</b> én.</span>
+          </div>
+          <div class="foes"><span class="foe">Mandragora</span><span class="foe">Mossy</span><span class="foe">Time Mage Claris</span><span class="foe more">+10</span></div>
+        </article><article class="mission" data-s="bandit of the forest mistral 42 mossy mandragora head bandit zaza">
+          <header class="m-head">
+            <h3 class="m-name">Bandit of the Forest</h3>
+            <span class="m-id">#42</span>
+          </header>
+          <div class="m-stats">
+            <span class="stat" title="Vagues"><b>5</b> vagues</span>
+            <span class="stat" title="Ennemis au total"><b>14</b> ennemis</span>
+            <span class="stat energy" title="Énergie"><b>4</b> én.</span>
+          </div>
+          <div class="foes"><span class="foe">Mossy</span><span class="foe">Mandragora</span><span class="foe">Head Bandit Zaza</span><span class="foe more">+11</span></div>
+        </article><article class="mission" data-s="thunder blasting wetlands mistral 50 harpy sky pirate grafl sparky king sparky">
+          <header class="m-head">
+            <h3 class="m-name">Thunder Blasting Wetlands</h3>
+            <span class="m-id">#50</span>
+          </header>
+          <div class="m-stats">
+            <span class="stat" title="Vagues"><b>5</b> vagues</span>
+            <span class="stat" title="Ennemis au total"><b>12</b> ennemis</span>
+            <span class="stat energy" title="Énergie"><b>3</b> én.</span>
+          </div>
+          <div class="foes"><span class="foe">Harpy</span><span class="foe">Sky Pirate Grafl</span><span class="foe">Sparky</span><span class="foe">King Sparky</span><span class="foe more">+8</span></div>
+        </article><article class="mission" data-s="commander of the thunder mistral 51 thunder nymph harpy sparky high dancer may">
+          <header class="m-head">
+            <h3 class="m-name">Commander of the Thunder</h3>
+            <span class="m-id">#51</span>
+          </header>
+          <div class="m-stats">
+            <span class="stat" title="Vagues"><b>5</b> vagues</span>
+            <span class="stat" title="Ennemis au total"><b>13</b> ennemis</span>
+            <span class="stat energy" title="Énergie"><b>3</b> én.</span>
+          </div>
+          <div class="foes"><span class="foe">Thunder Nymph</span><span class="foe">Harpy</span><span class="foe">Sparky</span><span class="foe">High Dancer May</span><span class="foe more">+9</span></div>
+        </article><article class="mission" data-s="pirate of the wetlands mistral 52 dancer may thunder nymph harpy sky boss grafl">
+          <header class="m-head">
+            <h3 class="m-name">Pirate of the Wetlands</h3>
+            <span class="m-id">#52</span>
+          </header>
+          <div class="m-stats">
+            <span class="stat" title="Vagues"><b>5</b> vagues</span>
+            <span class="stat" title="Ennemis au total"><b>14</b> ennemis</span>
+            <span class="stat energy" title="Énergie"><b>4</b> én.</span>
+          </div>
+          <div class="foes"><span class="foe">Dancer May</span><span class="foe">Thunder Nymph</span><span class="foe">Harpy</span><span class="foe">Sky Boss Grafl</span><span class="foe more">+10</span></div>
+        </article><article class="mission" data-s="sacred ruins mistral 60 glowy angel unicorn king glowy">
+          <header class="m-head">
+            <h3 class="m-name">Sacred Ruins</h3>
+            <span class="m-id">#60</span>
+          </header>
+          <div class="m-stats">
+            <span class="stat" title="Vagues"><b>6</b> vagues</span>
+            <span class="stat" title="Ennemis au total"><b>14</b> ennemis</span>
+            <span class="stat energy" title="Énergie"><b>4</b> én.</span>
+          </div>
+          <div class="foes"><span class="foe">Glowy</span><span class="foe">Angel</span><span class="foe">Unicorn</span><span class="foe">King Glowy</span><span class="foe more">+10</span></div>
+        </article><article class="mission" data-s="wielder of the light mistral 61 angel glowy light nymph light lord mimir">
+          <header class="m-head">
+            <h3 class="m-name">Wielder of the Light</h3>
+            <span class="m-id">#61</span>
+          </header>
+          <div class="m-stats">
+            <span class="stat" title="Vagues"><b>6</b> vagues</span>
+            <span class="stat" title="Ennemis au total"><b>15</b> ennemis</span>
+            <span class="stat energy" title="Énergie"><b>4</b> én.</span>
+          </div>
+          <div class="foes"><span class="foe">Angel</span><span class="foe">Glowy</span><span class="foe">Light Nymph</span><span class="foe">Light Lord Mimir</span><span class="foe more">+11</span></div>
+        </article><article class="mission" data-s="the heinous chamber mistral 70 gloomy skeleton medusa king gloomy">
+          <header class="m-head">
+            <h3 class="m-name">The Heinous Chamber</h3>
+            <span class="m-id">#70</span>
+          </header>
+          <div class="m-stats">
+            <span class="stat" title="Vagues"><b>6</b> vagues</span>
+            <span class="stat" title="Ennemis au total"><b>13</b> ennemis</span>
+            <span class="stat energy" title="Énergie"><b>4</b> én.</span>
+          </div>
+          <div class="foes"><span class="foe">Gloomy</span><span class="foe">Skeleton</span><span class="foe">Medusa</span><span class="foe">King Gloomy</span><span class="foe more">+9</span></div>
+        </article><article class="mission" data-s="manipulator of the dark mistral 71 gloomy skeleton magician lily">
+          <header class="m-head">
+            <h3 class="m-name">Manipulator of the Dark</h3>
+            <span class="m-id">#71</span>
+          </header>
+          <div class="m-stats">
+            <span class="stat" title="Vagues"><b>6</b> vagues</span>
+            <span class="stat" title="Ennemis au total"><b>14</b> ennemis</span>
+            <span class="stat energy" title="Énergie"><b>4</b> én.</span>
+          </div>
+          <div class="foes"><span class="foe">Gloomy</span><span class="foe">Skeleton</span><span class="foe">Magician Lily</span><span class="foe more">+11</span></div>
+        </article></div>
+    </section><section class="zone" data-zone="morgan">
+      <div class="z-head"><h2>Morgan</h2><span class="z-count">3</span></div>
+      <div class="grid"><article class="mission" data-s="the burning desert morgan 200 orthos witch liza knight agni">
+          <header class="m-head">
+            <h3 class="m-name">The Burning Desert</h3>
+            <span class="m-id">#200</span>
+          </header>
+          <div class="m-stats">
+            <span class="stat" title="Vagues"><b>7</b> vagues</span>
+            <span class="stat" title="Ennemis au total"><b>13</b> ennemis</span>
+            <span class="stat energy" title="Énergie"><b>5</b> én.</span>
+          </div>
+          <div class="foes"><span class="foe">Orthos</span><span class="foe">Witch Liza</span><span class="foe">Knight Agni</span><span class="foe more">+10</span></div>
+        </article><article class="mission" data-s="the precarious beast master morgan 202 thief leon goblin witch liza orthos warlock liza rage beast zegar">
+          <header class="m-head">
+            <h3 class="m-name">The Precarious Beast Master</h3>
+            <span class="m-id">#202</span>
+          </header>
+          <div class="m-stats">
+            <span class="stat" title="Vagues"><b>8</b> vagues</span>
+            <span class="stat" title="Ennemis au total"><b>25</b> ennemis</span>
+            <span class="stat energy" title="Énergie"><b>7</b> én.</span>
+          </div>
+          <div class="foes"><span class="foe">Thief Leon</span><span class="foe">Goblin</span><span class="foe">Witch Liza</span><span class="foe">Orthos</span><span class="foe">Warlock Liza</span><span class="foe">Rage Beast Zegar</span><span class="foe more">+19</span></div>
+        </article><article class="mission" data-s="land of the light morgan 240 orthos sage mimir ramia angel cowboy heidt">
+          <header class="m-head">
+            <h3 class="m-name">Land of the Light</h3>
+            <span class="m-id">#240</span>
+          </header>
+          <div class="m-stats">
+            <span class="stat" title="Vagues"><b>7</b> vagues</span>
+            <span class="stat" title="Ennemis au total"><b>13</b> ennemis</span>
+            <span class="stat energy" title="Énergie"><b>6</b> én.</span>
+          </div>
+          <div class="foes"><span class="foe">Orthos</span><span class="foe">Sage Mimir</span><span class="foe">Ramia</span><span class="foe">Angel</span><span class="foe">Cowboy Heidt</span><span class="foe more">+8</span></div>
+        </article></div>
+    </section><section class="zone" data-zone="st. lamia">
+      <div class="z-head"><h2>St. Lamia</h2><span class="z-count">6</span></div>
+      <div class="grid"><article class="mission" data-s="scorching trails st. lamia 300 redcap thief leon orthos salamander witch liza ifrit">
+          <header class="m-head">
+            <h3 class="m-name">Scorching Trails</h3>
+            <span class="m-id">#300</span>
+          </header>
+          <div class="m-stats">
+            <span class="stat" title="Vagues"><b>8</b> vagues</span>
+            <span class="stat" title="Ennemis au total"><b>25</b> ennemis</span>
+            <span class="stat energy" title="Énergie"><b>8</b> én.</span>
+          </div>
+          <div class="foes"><span class="foe">Redcap</span><span class="foe">Thief Leon</span><span class="foe">Orthos</span><span class="foe">Salamander</span><span class="foe">Witch Liza</span><span class="foe">Ifrit</span><span class="foe more">+19</span></div>
+        </article><article class="mission" data-s="the tarnished peaks st. lamia 330 minotaur sylph dancer may sky pirate grafl aero thunder idol djin">
+          <header class="m-head">
+            <h3 class="m-name">The Tarnished Peaks</h3>
+            <span class="m-id">#330</span>
+          </header>
+          <div class="m-stats">
+            <span class="stat" title="Vagues"><b>8</b> vagues</span>
+            <span class="stat" title="Ennemis au total"><b>22</b> ennemis</span>
+            <span class="stat energy" title="Énergie"><b>8</b> én.</span>
+          </div>
+          <div class="foes"><span class="foe">Minotaur</span><span class="foe">Sylph</span><span class="foe">Dancer May</span><span class="foe">Sky Pirate Grafl</span><span class="foe">Aero</span><span class="foe">Thunder Idol</span><span class="foe more">+16</span></div>
+        </article><article class="mission" data-s="float like a butterfly st. lamia 332 aero dancer may minotaur sylph sky pirate grafl emilia">
+          <header class="m-head">
+            <h3 class="m-name">Float Like a Butterfly</h3>
+            <span class="m-id">#332</span>
+          </header>
+          <div class="m-stats">
+            <span class="stat" title="Vagues"><b>9</b> vagues</span>
+            <span class="stat" title="Ennemis au total"><b>29</b> ennemis</span>
+            <span class="stat energy" title="Énergie"><b>8</b> én.</span>
+          </div>
+          <div class="foes"><span class="foe">Aero</span><span class="foe">Dancer May</span><span class="foe">Minotaur</span><span class="foe">Sylph</span><span class="foe">Sky Pirate Grafl</span><span class="foe">Emilia</span><span class="foe more">+23</span></div>
+        </article><article class="mission" data-s="the riotous thunderbird st. lamia 333 minotaur sylph aero dancer may sky boss grafl sky pirate grafl thunder idol thunderbird">
+          <header class="m-head">
+            <h3 class="m-name">The Riotous Thunderbird</h3>
+            <span class="m-id">#333</span>
+          </header>
+          <div class="m-stats">
+            <span class="stat" title="Vagues"><b>9</b> vagues</span>
+            <span class="stat" title="Ennemis au total"><b>30</b> ennemis</span>
+            <span class="stat energy" title="Énergie"><b>8</b> én.</span>
+          </div>
+          <div class="foes"><span class="foe">Minotaur</span><span class="foe">Sylph</span><span class="foe">Aero</span><span class="foe">Dancer May</span><span class="foe">Sky Boss Grafl</span><span class="foe">Sky Pirate Grafl</span><span class="foe more">+24</span></div>
+        </article><article class="mission" data-s="the raged beast of destruction st. lamia 334 minotaur sylph sky pirate grafl aero dancer may thunder idol king behemoth">
+          <header class="m-head">
+            <h3 class="m-name">The Raged Beast of Destruction</h3>
+            <span class="m-id">#334</span>
+          </header>
+          <div class="m-stats">
+            <span class="stat" title="Vagues"><b>11</b> vagues</span>
+            <span class="stat" title="Ennemis au total"><b>39</b> ennemis</span>
+            <span class="stat energy" title="Énergie"><b>10</b> én.</span>
+          </div>
+          <div class="foes"><span class="foe">Minotaur</span><span class="foe">Sylph</span><span class="foe">Sky Pirate Grafl</span><span class="foe">Aero</span><span class="foe">Dancer May</span><span class="foe">Thunder Idol</span><span class="foe more">+33</span></div>
+        </article><article class="mission" data-s="the fourfold pillar st. lamia 364 trent fairy geomancer claris archangel priestess maria sage mimir salamander rantoul">
+          <header class="m-head">
+            <h3 class="m-name">The Fourfold Pillar</h3>
+            <span class="m-id">#364</span>
+          </header>
+          <div class="m-stats">
+            <span class="stat" title="Vagues"><b>11</b> vagues</span>
+            <span class="stat" title="Ennemis au total"><b>45</b> ennemis</span>
+            <span class="stat energy" title="Énergie"><b>10</b> én.</span>
+          </div>
+          <div class="foes"><span class="foe">Trent</span><span class="foe">Fairy</span><span class="foe">Geomancer Claris</span><span class="foe">Archangel</span><span class="foe">Priestess Maria</span><span class="foe">Sage Mimir</span><span class="foe more">+39</span></div>
+        </article></div>
+    </section><section class="zone" data-zone="encervis">
+      <div class="z-head"><h2>Encervis</h2><span class="z-count">25</span></div>
+      <div class="grid"><article class="mission" data-s="the flames that rule encervis 501 orc orthos redcap salamander witch liza warlock liza thief leon ifrit">
+          <header class="m-head">
+            <h3 class="m-name">The Flames that Rule</h3>
+            <span class="m-id">#501</span>
+          </header>
+          <div class="m-stats">
+            <span class="stat" title="Vagues"><b>9</b> vagues</span>
+            <span class="stat" title="Ennemis au total"><b>30</b> ennemis</span>
+            <span class="stat energy" title="Énergie"><b>10</b> én.</span>
+          </div>
+          <div class="foes"><span class="foe">Orc</span><span class="foe">Orthos</span><span class="foe">Redcap</span><span class="foe">Salamander</span><span class="foe">Witch Liza</span><span class="foe">Warlock Liza</span><span class="foe more">+24</span></div>
+        </article><article class="mission" data-s="dinner for watchdogs encervis 502 orc salamander thief leon orthos redcap witch liza great thief leon fire pot">
+          <header class="m-head">
+            <h3 class="m-name">Dinner for Watchdogs</h3>
+            <span class="m-id">#502</span>
+          </header>
+          <div class="m-stats">
+            <span class="stat" title="Vagues"><b>10</b> vagues</span>
+            <span class="stat" title="Ennemis au total"><b>36</b> ennemis</span>
+            <span class="stat energy" title="Énergie"><b>12</b> én.</span>
+          </div>
+          <div class="foes"><span class="foe">Orc</span><span class="foe">Salamander</span><span class="foe">Thief Leon</span><span class="foe">Orthos</span><span class="foe">Redcap</span><span class="foe">Witch Liza</span><span class="foe more">+30</span></div>
+        </article><article class="mission" data-s="death and rebirth encervis 503 thief leon orc witch liza redcap salamander orthos great thief leon fire king vargas">
+          <header class="m-head">
+            <h3 class="m-name">Death and Rebirth</h3>
+            <span class="m-id">#503</span>
+          </header>
+          <div class="m-stats">
+            <span class="stat" title="Vagues"><b>11</b> vagues</span>
+            <span class="stat" title="Ennemis au total"><b>36</b> ennemis</span>
+            <span class="stat energy" title="Énergie"><b>12</b> én.</span>
+          </div>
+          <div class="foes"><span class="foe">Thief Leon</span><span class="foe">Orc</span><span class="foe">Witch Liza</span><span class="foe">Redcap</span><span class="foe">Salamander</span><span class="foe">Orthos</span><span class="foe more">+30</span></div>
+        </article><article class="mission" data-s="the lake&#x27;s allure encervis 512 wendigo pirate verica sahuagin sea prince verica rantoul ramia water pot scylla">
+          <header class="m-head">
+            <h3 class="m-name">The Lake&#x27;s Allure</h3>
+            <span class="m-id">#512</span>
+          </header>
+          <div class="m-stats">
+            <span class="stat" title="Vagues"><b>10</b> vagues</span>
+            <span class="stat" title="Ennemis au total"><b>28</b> ennemis</span>
+            <span class="stat energy" title="Énergie"><b>12</b> én.</span>
+          </div>
+          <div class="foes"><span class="foe">Wendigo</span><span class="foe">Pirate Verica</span><span class="foe">Sahuagin</span><span class="foe">Sea Prince Verica</span><span class="foe">Rantoul</span><span class="foe">Ramia</span><span class="foe more">+22</span></div>
+        </article><article class="mission" data-s="the ice cold warrior encervis 513 pirate verica wendigo priest merith sahuagin rantoul ramia sea prince verica ice queen selena">
+          <header class="m-head">
+            <h3 class="m-name">The Ice Cold Warrior</h3>
+            <span class="m-id">#513</span>
+          </header>
+          <div class="m-stats">
+            <span class="stat" title="Vagues"><b>11</b> vagues</span>
+            <span class="stat" title="Ennemis au total"><b>35</b> ennemis</span>
+            <span class="stat energy" title="Énergie"><b>12</b> én.</span>
+          </div>
+          <div class="foes"><span class="foe">Pirate Verica</span><span class="foe">Wendigo</span><span class="foe">Priest Merith</span><span class="foe">Sahuagin</span><span class="foe">Rantoul</span><span class="foe">Ramia</span><span class="foe more">+29</span></div>
+        </article><article class="mission" data-s="the castle gates open encervis 520 dwarf fairy polevik bandit zaza trent wild bandit zaza dwarf prince time lord claris">
+          <header class="m-head">
+            <h3 class="m-name">The Castle Gates Open</h3>
+            <span class="m-id">#520</span>
+          </header>
+          <div class="m-stats">
+            <span class="stat" title="Vagues"><b>8</b> vagues</span>
+            <span class="stat" title="Ennemis au total"><b>23</b> ennemis</span>
+            <span class="stat energy" title="Énergie"><b>10</b> én.</span>
+          </div>
+          <div class="foes"><span class="foe">Dwarf</span><span class="foe">Fairy</span><span class="foe">Polevik</span><span class="foe">Bandit Zaza</span><span class="foe">Trent</span><span class="foe">Wild Bandit Zaza</span><span class="foe more">+17</span></div>
+        </article><article class="mission" data-s="castle winds encervis 521 bandit zaza dwarf geomancer claris polevik trent fairy time mage claris ent">
+          <header class="m-head">
+            <h3 class="m-name">Castle Winds</h3>
+            <span class="m-id">#521</span>
+          </header>
+          <div class="m-stats">
+            <span class="stat" title="Vagues"><b>9</b> vagues</span>
+            <span class="stat" title="Ennemis au total"><b>30</b> ennemis</span>
+            <span class="stat energy" title="Énergie"><b>10</b> én.</span>
+          </div>
+          <div class="foes"><span class="foe">Bandit Zaza</span><span class="foe">Dwarf</span><span class="foe">Geomancer Claris</span><span class="foe">Polevik</span><span class="foe">Trent</span><span class="foe">Fairy</span><span class="foe more">+24</span></div>
+        </article><article class="mission" data-s="fairy royalty encervis 522 bandit zaza dwarf geomancer claris polevik trent fairy wild bandit zaza titania">
+          <header class="m-head">
+            <h3 class="m-name">Fairy Royalty</h3>
+            <span class="m-id">#522</span>
+          </header>
+          <div class="m-stats">
+            <span class="stat" title="Vagues"><b>10</b> vagues</span>
+            <span class="stat" title="Ennemis au total"><b>32</b> ennemis</span>
+            <span class="stat energy" title="Énergie"><b>12</b> én.</span>
+          </div>
+          <div class="foes"><span class="foe">Bandit Zaza</span><span class="foe">Dwarf</span><span class="foe">Geomancer Claris</span><span class="foe">Polevik</span><span class="foe">Trent</span><span class="foe">Fairy</span><span class="foe more">+26</span></div>
+        </article><article class="mission" data-s="world tree and the savior encervis 523 bandit zaza dwarf geomancer claris polevik fairy trent wild bandit zaza earth pike lance">
+          <header class="m-head">
+            <h3 class="m-name">World Tree and the Savior</h3>
+            <span class="m-id">#523</span>
+          </header>
+          <div class="m-stats">
+            <span class="stat" title="Vagues"><b>11</b> vagues</span>
+            <span class="stat" title="Ennemis au total"><b>38</b> ennemis</span>
+            <span class="stat energy" title="Énergie"><b>12</b> én.</span>
+          </div>
+          <div class="foes"><span class="foe">Bandit Zaza</span><span class="foe">Dwarf</span><span class="foe">Geomancer Claris</span><span class="foe">Polevik</span><span class="foe">Fairy</span><span class="foe">Trent</span><span class="foe more">+32</span></div>
+        </article><article class="mission" data-s="deception of the spirit world encervis 524 dwarf fairy polevik trent geomancer claris time mage claris wild bandit zaza bandit zaza">
+          <header class="m-head">
+            <h3 class="m-name">Deception of the Spirit World</h3>
+            <span class="m-id">#524</span>
+          </header>
+          <div class="m-stats">
+            <span class="stat" title="Vagues"><b>12</b> vagues</span>
+            <span class="stat" title="Ennemis au total"><b>31</b> ennemis</span>
+            <span class="stat energy" title="Énergie"><b>15</b> én.</span>
+          </div>
+          <div class="foes"><span class="foe">Dwarf</span><span class="foe">Fairy</span><span class="foe">Polevik</span><span class="foe">Trent</span><span class="foe">Geomancer Claris</span><span class="foe">Time Mage Claris</span><span class="foe more">+25</span></div>
+        </article><article class="mission" data-s="curse of the ravine encervis 530 sky pirate grafl empusa dancer may aero sylph minotaur sky emperor grafl gorgon">
+          <header class="m-head">
+            <h3 class="m-name">Curse of the Ravine</h3>
+            <span class="m-id">#530</span>
+          </header>
+          <div class="m-stats">
+            <span class="stat" title="Vagues"><b>8</b> vagues</span>
+            <span class="stat" title="Ennemis au total"><b>22</b> ennemis</span>
+            <span class="stat energy" title="Énergie"><b>10</b> én.</span>
+          </div>
+          <div class="foes"><span class="foe">Sky Pirate Grafl</span><span class="foe">Empusa</span><span class="foe">Dancer May</span><span class="foe">Aero</span><span class="foe">Sylph</span><span class="foe">Minotaur</span><span class="foe more">+16</span></div>
+        </article><article class="mission" data-s="long blade warrior encervis 542 priestess maria al-mi&#x27;raj archangel fairy unicorn sage mimir minotaur pegasus">
+          <header class="m-head">
+            <h3 class="m-name">Long Blade Warrior</h3>
+            <span class="m-id">#542</span>
+          </header>
+          <div class="m-stats">
+            <span class="stat" title="Vagues"><b>11</b> vagues</span>
+            <span class="stat" title="Ennemis au total"><b>43</b> ennemis</span>
+            <span class="stat energy" title="Énergie"><b>14</b> én.</span>
+          </div>
+          <div class="foes"><span class="foe">Priestess Maria</span><span class="foe">Al-mi&#x27;raj</span><span class="foe">Archangel</span><span class="foe">Fairy</span><span class="foe">Unicorn</span><span class="foe">Sage Mimir</span><span class="foe more">+37</span></div>
+        </article><article class="mission" data-s="blade of the victor encervis 543 al-mi&#x27;raj orthos unicorn minotaur priestess maria archangel sage mimir ramia">
+          <header class="m-head">
+            <h3 class="m-name">Blade of the Victor</h3>
+            <span class="m-id">#543</span>
+          </header>
+          <div class="m-stats">
+            <span class="stat" title="Vagues"><b>12</b> vagues</span>
+            <span class="stat" title="Ennemis au total"><b>39</b> ennemis</span>
+            <span class="stat energy" title="Énergie"><b>14</b> én.</span>
+          </div>
+          <div class="foes"><span class="foe">Al-mi&#x27;raj</span><span class="foe">Orthos</span><span class="foe">Unicorn</span><span class="foe">Minotaur</span><span class="foe">Priestess Maria</span><span class="foe">Archangel</span><span class="foe more">+33</span></div>
+        </article><article class="mission" data-s="where the light shines encervis 544 archangel unicorn sage mimir priestess maria ramia light lord mimir pegasus al-mi&#x27;raj">
+          <header class="m-head">
+            <h3 class="m-name">Where the Light Shines</h3>
+            <span class="m-id">#544</span>
+          </header>
+          <div class="m-stats">
+            <span class="stat" title="Vagues"><b>12</b> vagues</span>
+            <span class="stat" title="Ennemis au total"><b>33</b> ennemis</span>
+            <span class="stat energy" title="Énergie"><b>16</b> én.</span>
+          </div>
+          <div class="foes"><span class="foe">Archangel</span><span class="foe">Unicorn</span><span class="foe">Sage Mimir</span><span class="foe">Priestess Maria</span><span class="foe">Ramia</span><span class="foe">Light Lord Mimir</span><span class="foe more">+27</span></div>
+        </article><article class="mission" data-s="sea of wicked thoughts encervis 550 skeleton king sorceress lily lilin medusa imp minotaur succubus metal ghost">
+          <header class="m-head">
+            <h3 class="m-name">Sea of Wicked Thoughts</h3>
+            <span class="m-id">#550</span>
+          </header>
+          <div class="m-stats">
+            <span class="stat" title="Vagues"><b>9</b> vagues</span>
+            <span class="stat" title="Ennemis au total"><b>24</b> ennemis</span>
+            <span class="stat energy" title="Énergie"><b>12</b> én.</span>
+          </div>
+          <div class="foes"><span class="foe">Skeleton King</span><span class="foe">Sorceress Lily</span><span class="foe">Lilin</span><span class="foe">Medusa</span><span class="foe">Imp</span><span class="foe">Minotaur</span><span class="foe more">+18</span></div>
+        </article><article class="mission" data-s="vile dreams come true encervis 551 imp orthos skeleton king lilin sorceress lily minotaur magician lily medusa">
+          <header class="m-head">
+            <h3 class="m-name">Vile Dreams Come True</h3>
+            <span class="m-id">#551</span>
+          </header>
+          <div class="m-stats">
+            <span class="stat" title="Vagues"><b>10</b> vagues</span>
+            <span class="stat" title="Ennemis au total"><b>32</b> ennemis</span>
+            <span class="stat energy" title="Énergie"><b>12</b> én.</span>
+          </div>
+          <div class="foes"><span class="foe">Imp</span><span class="foe">Orthos</span><span class="foe">Skeleton King</span><span class="foe">Lilin</span><span class="foe">Sorceress Lily</span><span class="foe">Minotaur</span><span class="foe more">+26</span></div>
+        </article><article class="mission" data-s="the endlessly dying witch encervis 552 lilin imp skeleton king fairy medusa minotaur zahhak ramia">
+          <header class="m-head">
+            <h3 class="m-name">The Endlessly Dying Witch</h3>
+            <span class="m-id">#552</span>
+          </header>
+          <div class="m-stats">
+            <span class="stat" title="Vagues"><b>11</b> vagues</span>
+            <span class="stat" title="Ennemis au total"><b>43</b> ennemis</span>
+            <span class="stat energy" title="Énergie"><b>14</b> én.</span>
+          </div>
+          <div class="foes"><span class="foe">Lilin</span><span class="foe">Imp</span><span class="foe">Skeleton King</span><span class="foe">Fairy</span><span class="foe">Medusa</span><span class="foe">Minotaur</span><span class="foe more">+37</span></div>
+        </article><article class="mission" data-s="wicked hostility encervis 553 imp sorceress lily skeleton king lilin medusa minotaur zahhak ramia">
+          <header class="m-head">
+            <h3 class="m-name">Wicked Hostility</h3>
+            <span class="m-id">#553</span>
+          </header>
+          <div class="m-stats">
+            <span class="stat" title="Vagues"><b>12</b> vagues</span>
+            <span class="stat" title="Ennemis au total"><b>40</b> ennemis</span>
+            <span class="stat energy" title="Énergie"><b>14</b> én.</span>
+          </div>
+          <div class="foes"><span class="foe">Imp</span><span class="foe">Sorceress Lily</span><span class="foe">Skeleton King</span><span class="foe">Lilin</span><span class="foe">Medusa</span><span class="foe">Minotaur</span><span class="foe more">+34</span></div>
+        </article><article class="mission" data-s="the skies above encervis 554 medusa imp sorceress lily lilin skeleton king magician lily zahhak ramia">
+          <header class="m-head">
+            <h3 class="m-name">The Skies Above</h3>
+            <span class="m-id">#554</span>
+          </header>
+          <div class="m-stats">
+            <span class="stat" title="Vagues"><b>12</b> vagues</span>
+            <span class="stat" title="Ennemis au total"><b>34</b> ennemis</span>
+            <span class="stat energy" title="Énergie"><b>16</b> én.</span>
+          </div>
+          <div class="foes"><span class="foe">Medusa</span><span class="foe">Imp</span><span class="foe">Sorceress Lily</span><span class="foe">Lilin</span><span class="foe">Skeleton King</span><span class="foe">Magician Lily</span><span class="foe more">+28</span></div>
+        </article><article class="mission" data-s="escape the sky fort encervis 560 thief leon lilin geomancer claris unicorn orc sky pirate grafl medusa minotaur">
+          <header class="m-head">
+            <h3 class="m-name">Escape the Sky Fort</h3>
+            <span class="m-id">#560</span>
+          </header>
+          <div class="m-stats">
+            <span class="stat" title="Vagues"><b>10</b> vagues</span>
+            <span class="stat" title="Ennemis au total"><b>43</b> ennemis</span>
+            <span class="stat energy" title="Énergie"><b>14</b> én.</span>
+          </div>
+          <div class="foes"><span class="foe">Thief Leon</span><span class="foe">Lilin</span><span class="foe">Geomancer Claris</span><span class="foe">Unicorn</span><span class="foe">Orc</span><span class="foe">Sky Pirate Grafl</span><span class="foe more">+37</span></div>
+        </article><article class="mission" data-s="evade the oncoming hordes encervis 561 salamander archangel orc dancer may pirate verica trent thief leon rantoul">
+          <header class="m-head">
+            <h3 class="m-name">Evade the Oncoming Hordes</h3>
+            <span class="m-id">#561</span>
+          </header>
+          <div class="m-stats">
+            <span class="stat" title="Vagues"><b>10</b> vagues</span>
+            <span class="stat" title="Ennemis au total"><b>42</b> ennemis</span>
+            <span class="stat energy" title="Énergie"><b>14</b> én.</span>
+          </div>
+          <div class="foes"><span class="foe">Salamander</span><span class="foe">Archangel</span><span class="foe">Orc</span><span class="foe">Dancer May</span><span class="foe">Pirate Verica</span><span class="foe">Trent</span><span class="foe more">+36</span></div>
+        </article><article class="mission" data-s="endless barrage encervis 562 orc sky pirate grafl medusa minotaur rantoul skeleton king unicorn dwarf">
+          <header class="m-head">
+            <h3 class="m-name">Endless Barrage</h3>
+            <span class="m-id">#562</span>
+          </header>
+          <div class="m-stats">
+            <span class="stat" title="Vagues"><b>11</b> vagues</span>
+            <span class="stat" title="Ennemis au total"><b>43</b> ennemis</span>
+            <span class="stat energy" title="Énergie"><b>15</b> én.</span>
+          </div>
+          <div class="foes"><span class="foe">Orc</span><span class="foe">Sky Pirate Grafl</span><span class="foe">Medusa</span><span class="foe">Minotaur</span><span class="foe">Rantoul</span><span class="foe">Skeleton King</span><span class="foe more">+37</span></div>
+        </article><article class="mission" data-s="no turning back encervis 563 orc sky pirate grafl medusa minotaur dwarf salamander sorceress lily pirate verica">
+          <header class="m-head">
+            <h3 class="m-name">No Turning Back</h3>
+            <span class="m-id">#563</span>
+          </header>
+          <div class="m-stats">
+            <span class="stat" title="Vagues"><b>12</b> vagues</span>
+            <span class="stat" title="Ennemis au total"><b>50</b> ennemis</span>
+            <span class="stat energy" title="Énergie"><b>16</b> én.</span>
+          </div>
+          <div class="foes"><span class="foe">Orc</span><span class="foe">Sky Pirate Grafl</span><span class="foe">Medusa</span><span class="foe">Minotaur</span><span class="foe">Dwarf</span><span class="foe">Salamander</span><span class="foe more">+44</span></div>
+        </article><article class="mission" data-s="the commander&#x27;s pets encervis 564 rantoul skeleton king unicorn dwarf al-mi&#x27;raj archangel priestess maria ramia">
+          <header class="m-head">
+            <h3 class="m-name">The Commander&#x27;s Pets</h3>
+            <span class="m-id">#564</span>
+          </header>
+          <div class="m-stats">
+            <span class="stat" title="Vagues"><b>12</b> vagues</span>
+            <span class="stat" title="Ennemis au total"><b>49</b> ennemis</span>
+            <span class="stat energy" title="Énergie"><b>16</b> én.</span>
+          </div>
+          <div class="foes"><span class="foe">Rantoul</span><span class="foe">Skeleton King</span><span class="foe">Unicorn</span><span class="foe">Dwarf</span><span class="foe">Al-mi&#x27;raj</span><span class="foe">Archangel</span><span class="foe more">+43</span></div>
+        </article><article class="mission" data-s="the mad god descends encervis 565 sage mimir priestess maria unicorn archangel ramia al-mi&#x27;raj pirate verica trent">
+          <header class="m-head">
+            <h3 class="m-name">The Mad God Descends</h3>
+            <span class="m-id">#565</span>
+          </header>
+          <div class="m-stats">
+            <span class="stat" title="Vagues"><b>12</b> vagues</span>
+            <span class="stat" title="Ennemis au total"><b>50</b> ennemis</span>
+            <span class="stat energy" title="Énergie"><b>18</b> én.</span>
+          </div>
+          <div class="foes"><span class="foe">Sage Mimir</span><span class="foe">Priestess Maria</span><span class="foe">Unicorn</span><span class="foe">Archangel</span><span class="foe">Ramia</span><span class="foe">Al-mi&#x27;raj</span><span class="foe more">+44</span></div>
+        </article></div>
+    </section><section class="zone" data-zone="palmyna">
+      <div class="z-head"><h2>Palmyna</h2><span class="z-count">22</span></div>
+      <div class="grid"><article class="mission" data-s="the scorched pathway palmyna 600 orc redcap orthos thief leon salamander witch liza great thief leon firedrake">
+          <header class="m-head">
+            <h3 class="m-name">The Scorched Pathway</h3>
+            <span class="m-id">#600</span>
+          </header>
+          <div class="m-stats">
+            <span class="stat" title="Vagues"><b>8</b> vagues</span>
+            <span class="stat" title="Ennemis au total"><b>26</b> ennemis</span>
+            <span class="stat energy" title="Énergie"><b>12</b> én.</span>
+          </div>
+          <div class="foes"><span class="foe">Orc</span><span class="foe">Redcap</span><span class="foe">Orthos</span><span class="foe">Thief Leon</span><span class="foe">Salamander</span><span class="foe">Witch Liza</span><span class="foe more">+20</span></div>
+        </article><article class="mission" data-s="raging heat wave palmyna 601 thief leon orc witch liza redcap salamander orthos pyromancer liza ifrit">
+          <header class="m-head">
+            <h3 class="m-name">Raging Heat Wave</h3>
+            <span class="m-id">#601</span>
+          </header>
+          <div class="m-stats">
+            <span class="stat" title="Vagues"><b>9</b> vagues</span>
+            <span class="stat" title="Ennemis au total"><b>28</b> ennemis</span>
+            <span class="stat energy" title="Énergie"><b>12</b> én.</span>
+          </div>
+          <div class="foes"><span class="foe">Thief Leon</span><span class="foe">Orc</span><span class="foe">Witch Liza</span><span class="foe">Redcap</span><span class="foe">Salamander</span><span class="foe">Orthos</span><span class="foe more">+22</span></div>
+        </article><article class="mission" data-s="the ice covered castle palmyna 610 wendigo sahuagin ramia rantoul priest merith sea prince verica pirate verica undine">
+          <header class="m-head">
+            <h3 class="m-name">The Ice Covered Castle</h3>
+            <span class="m-id">#610</span>
+          </header>
+          <div class="m-stats">
+            <span class="stat" title="Vagues"><b>8</b> vagues</span>
+            <span class="stat" title="Ennemis au total"><b>26</b> ennemis</span>
+            <span class="stat energy" title="Énergie"><b>12</b> én.</span>
+          </div>
+          <div class="foes"><span class="foe">Wendigo</span><span class="foe">Sahuagin</span><span class="foe">Ramia</span><span class="foe">Rantoul</span><span class="foe">Priest Merith</span><span class="foe">Sea Prince Verica</span><span class="foe more">+20</span></div>
+        </article><article class="mission" data-s="frozen halls palmyna 611 sahuagin ramia priest merith rantoul bishop merith wendigo pirate verica legtos">
+          <header class="m-head">
+            <h3 class="m-name">Frozen Halls</h3>
+            <span class="m-id">#611</span>
+          </header>
+          <div class="m-stats">
+            <span class="stat" title="Vagues"><b>9</b> vagues</span>
+            <span class="stat" title="Ennemis au total"><b>26</b> ennemis</span>
+            <span class="stat energy" title="Énergie"><b>12</b> én.</span>
+          </div>
+          <div class="foes"><span class="foe">Sahuagin</span><span class="foe">Ramia</span><span class="foe">Priest Merith</span><span class="foe">Rantoul</span><span class="foe">Bishop Merith</span><span class="foe">Wendigo</span><span class="foe more">+20</span></div>
+        </article><article class="mission" data-s="frigid breath palmyna 612 wendigo ramia rantoul pirate verica sahuagin scylla priest merith hrungnir">
+          <header class="m-head">
+            <h3 class="m-name">Frigid Breath</h3>
+            <span class="m-id">#612</span>
+          </header>
+          <div class="m-stats">
+            <span class="stat" title="Vagues"><b>10</b> vagues</span>
+            <span class="stat" title="Ennemis au total"><b>28</b> ennemis</span>
+            <span class="stat energy" title="Énergie"><b>13</b> én.</span>
+          </div>
+          <div class="foes"><span class="foe">Wendigo</span><span class="foe">Ramia</span><span class="foe">Rantoul</span><span class="foe">Pirate Verica</span><span class="foe">Sahuagin</span><span class="foe">Scylla</span><span class="foe more">+22</span></div>
+        </article><article class="mission" data-s="the path forward palmyna 613 pirate verica wendigo priest merith sahuagin rantoul ramia sea prince verica royal elimo">
+          <header class="m-head">
+            <h3 class="m-name">The Path Forward</h3>
+            <span class="m-id">#613</span>
+          </header>
+          <div class="m-stats">
+            <span class="stat" title="Vagues"><b>11</b> vagues</span>
+            <span class="stat" title="Ennemis au total"><b>37</b> ennemis</span>
+            <span class="stat energy" title="Énergie"><b>13</b> én.</span>
+          </div>
+          <div class="foes"><span class="foe">Pirate Verica</span><span class="foe">Wendigo</span><span class="foe">Priest Merith</span><span class="foe">Sahuagin</span><span class="foe">Rantoul</span><span class="foe">Ramia</span><span class="foe more">+31</span></div>
+        </article><article class="mission" data-s="beast above the wall palmyna 614 sahuagin pirate verica ramia rantoul priest merith wendigo bishop merith sea prince verica">
+          <header class="m-head">
+            <h3 class="m-name">Beast Above the Wall</h3>
+            <span class="m-id">#614</span>
+          </header>
+          <div class="m-stats">
+            <span class="stat" title="Vagues"><b>12</b> vagues</span>
+            <span class="stat" title="Ennemis au total"><b>40</b> ennemis</span>
+            <span class="stat energy" title="Énergie"><b>16</b> én.</span>
+          </div>
+          <div class="foes"><span class="foe">Sahuagin</span><span class="foe">Pirate Verica</span><span class="foe">Ramia</span><span class="foe">Rantoul</span><span class="foe">Priest Merith</span><span class="foe">Wendigo</span><span class="foe more">+34</span></div>
+        </article><article class="mission" data-s="in the sunlight palmyna 620 bandit zaza dwarf geomancer claris polevik trent fairy wild bandit zaza dryad">
+          <header class="m-head">
+            <h3 class="m-name">In the Sunlight</h3>
+            <span class="m-id">#620</span>
+          </header>
+          <div class="m-stats">
+            <span class="stat" title="Vagues"><b>8</b> vagues</span>
+            <span class="stat" title="Ennemis au total"><b>20</b> ennemis</span>
+            <span class="stat energy" title="Énergie"><b>12</b> én.</span>
+          </div>
+          <div class="foes"><span class="foe">Bandit Zaza</span><span class="foe">Dwarf</span><span class="foe">Geomancer Claris</span><span class="foe">Polevik</span><span class="foe">Trent</span><span class="foe">Fairy</span><span class="foe more">+14</span></div>
+        </article><article class="mission" data-s="the shadow in the trees palmyna 621 dwarf bandit zaza geomancer claris trent fairy polevik time lord claris ent">
+          <header class="m-head">
+            <h3 class="m-name">The Shadow in the Trees</h3>
+            <span class="m-id">#621</span>
+          </header>
+          <div class="m-stats">
+            <span class="stat" title="Vagues"><b>9</b> vagues</span>
+            <span class="stat" title="Ennemis au total"><b>26</b> ennemis</span>
+            <span class="stat energy" title="Énergie"><b>12</b> én.</span>
+          </div>
+          <div class="foes"><span class="foe">Dwarf</span><span class="foe">Bandit Zaza</span><span class="foe">Geomancer Claris</span><span class="foe">Trent</span><span class="foe">Fairy</span><span class="foe">Polevik</span><span class="foe more">+20</span></div>
+        </article><article class="mission" data-s="the forest&#x27;s savior palmyna 622 bandit zaza dwarf geomancer claris fairy trent polevik titania dwarf prince">
+          <header class="m-head">
+            <h3 class="m-name">The Forest&#x27;s Savior</h3>
+            <span class="m-id">#622</span>
+          </header>
+          <div class="m-stats">
+            <span class="stat" title="Vagues"><b>10</b> vagues</span>
+            <span class="stat" title="Ennemis au total"><b>36</b> ennemis</span>
+            <span class="stat energy" title="Énergie"><b>13</b> én.</span>
+          </div>
+          <div class="foes"><span class="foe">Bandit Zaza</span><span class="foe">Dwarf</span><span class="foe">Geomancer Claris</span><span class="foe">Fairy</span><span class="foe">Trent</span><span class="foe">Polevik</span><span class="foe more">+30</span></div>
+        </article><article class="mission" data-s="forest of the nymphs palmyna 623 bandit zaza dwarf geomancer claris fairy trent polevik wild bandit zaza pixy royal leore">
+          <header class="m-head">
+            <h3 class="m-name">Forest of the Nymphs</h3>
+            <span class="m-id">#623</span>
+          </header>
+          <div class="m-stats">
+            <span class="stat" title="Vagues"><b>11</b> vagues</span>
+            <span class="stat" title="Ennemis au total"><b>36</b> ennemis</span>
+            <span class="stat energy" title="Énergie"><b>13</b> én.</span>
+          </div>
+          <div class="foes"><span class="foe">Bandit Zaza</span><span class="foe">Dwarf</span><span class="foe">Geomancer Claris</span><span class="foe">Fairy</span><span class="foe">Trent</span><span class="foe">Polevik</span><span class="foe more">+30</span></div>
+        </article><article class="mission" data-s="race through the city palmyna 631 sky pirate grafl empusa dancer may aero minotaur royal dancer may sylph djin">
+          <header class="m-head">
+            <h3 class="m-name">Race Through the City</h3>
+            <span class="m-id">#631</span>
+          </header>
+          <div class="m-stats">
+            <span class="stat" title="Vagues"><b>9</b> vagues</span>
+            <span class="stat" title="Ennemis au total"><b>31</b> ennemis</span>
+            <span class="stat energy" title="Énergie"><b>12</b> én.</span>
+          </div>
+          <div class="foes"><span class="foe">Sky Pirate Grafl</span><span class="foe">Empusa</span><span class="foe">Dancer May</span><span class="foe">Aero</span><span class="foe">Minotaur</span><span class="foe">Royal Dancer May</span><span class="foe more">+25</span></div>
+        </article><article class="mission" data-s="the sky devouring bird palmyna 632 sylph empusa aero minotaur sky pirate grafl djin thunder pot gorgon">
+          <header class="m-head">
+            <h3 class="m-name">The Sky Devouring Bird</h3>
+            <span class="m-id">#632</span>
+          </header>
+          <div class="m-stats">
+            <span class="stat" title="Vagues"><b>10</b> vagues</span>
+            <span class="stat" title="Ennemis au total"><b>30</b> ennemis</span>
+            <span class="stat energy" title="Énergie"><b>13</b> én.</span>
+          </div>
+          <div class="foes"><span class="foe">Sylph</span><span class="foe">Empusa</span><span class="foe">Aero</span><span class="foe">Minotaur</span><span class="foe">Sky Pirate Grafl</span><span class="foe">Djin</span><span class="foe more">+24</span></div>
+        </article><article class="mission" data-s="the trembling earth palmyna 633 sky pirate grafl empusa dancer may aero sylph minotaur sky emperor grafl inventor elulu">
+          <header class="m-head">
+            <h3 class="m-name">The Trembling Earth</h3>
+            <span class="m-id">#633</span>
+          </header>
+          <div class="m-stats">
+            <span class="stat" title="Vagues"><b>11</b> vagues</span>
+            <span class="stat" title="Ennemis au total"><b>36</b> ennemis</span>
+            <span class="stat energy" title="Énergie"><b>13</b> én.</span>
+          </div>
+          <div class="foes"><span class="foe">Sky Pirate Grafl</span><span class="foe">Empusa</span><span class="foe">Dancer May</span><span class="foe">Aero</span><span class="foe">Sylph</span><span class="foe">Minotaur</span><span class="foe more">+30</span></div>
+        </article><article class="mission" data-s="a thunderous attack palmyna 634 empusa minotaur thunder pot sky pirate grafl aero sylph dancer may royal dancer may">
+          <header class="m-head">
+            <h3 class="m-name">A Thunderous Attack</h3>
+            <span class="m-id">#634</span>
+          </header>
+          <div class="m-stats">
+            <span class="stat" title="Vagues"><b>12</b> vagues</span>
+            <span class="stat" title="Ennemis au total"><b>34</b> ennemis</span>
+            <span class="stat energy" title="Énergie"><b>16</b> én.</span>
+          </div>
+          <div class="foes"><span class="foe">Empusa</span><span class="foe">Minotaur</span><span class="foe">Thunder Pot</span><span class="foe">Sky Pirate Grafl</span><span class="foe">Aero</span><span class="foe">Sylph</span><span class="foe more">+28</span></div>
+        </article><article class="mission" data-s="a response to devotion palmyna 640 al-mi&#x27;raj archangel ramia priestess maria angel maria orthos unicorn minotaur">
+          <header class="m-head">
+            <h3 class="m-name">A Response to Devotion</h3>
+            <span class="m-id">#640</span>
+          </header>
+          <div class="m-stats">
+            <span class="stat" title="Vagues"><b>9</b> vagues</span>
+            <span class="stat" title="Ennemis au total"><b>26</b> ennemis</span>
+            <span class="stat energy" title="Énergie"><b>14</b> én.</span>
+          </div>
+          <div class="foes"><span class="foe">Al-mi&#x27;raj</span><span class="foe">Archangel</span><span class="foe">Ramia</span><span class="foe">Priestess Maria</span><span class="foe">Angel Maria</span><span class="foe">Orthos</span><span class="foe more">+20</span></div>
+        </article><article class="mission" data-s="where light falls palmyna 641 al-mi&#x27;raj orthos archangel sage mimir priestess maria minotaur great sage mimir unicorn">
+          <header class="m-head">
+            <h3 class="m-name">Where Light Falls</h3>
+            <span class="m-id">#641</span>
+          </header>
+          <div class="m-stats">
+            <span class="stat" title="Vagues"><b>10</b> vagues</span>
+            <span class="stat" title="Ennemis au total"><b>34</b> ennemis</span>
+            <span class="stat energy" title="Énergie"><b>14</b> én.</span>
+          </div>
+          <div class="foes"><span class="foe">Al-mi&#x27;raj</span><span class="foe">Orthos</span><span class="foe">Archangel</span><span class="foe">Sage Mimir</span><span class="foe">Priestess Maria</span><span class="foe">Minotaur</span><span class="foe more">+28</span></div>
+        </article><article class="mission" data-s="the mischievous goddess palmyna 642 unicorn al-mi&#x27;raj sage mimir archangel priestess maria orthos pegasus fairy">
+          <header class="m-head">
+            <h3 class="m-name">The Mischievous Goddess</h3>
+            <span class="m-id">#642</span>
+          </header>
+          <div class="m-stats">
+            <span class="stat" title="Vagues"><b>11</b> vagues</span>
+            <span class="stat" title="Ennemis au total"><b>37</b> ennemis</span>
+            <span class="stat energy" title="Énergie"><b>15</b> én.</span>
+          </div>
+          <div class="foes"><span class="foe">Unicorn</span><span class="foe">Al-mi&#x27;raj</span><span class="foe">Sage Mimir</span><span class="foe">Archangel</span><span class="foe">Priestess Maria</span><span class="foe">Orthos</span><span class="foe more">+31</span></div>
+        </article><article class="mission" data-s="invitation to heaven palmyna 643 al-mi&#x27;raj unicorn sage mimir archangel minotaur priestess maria pegasus ramia">
+          <header class="m-head">
+            <h3 class="m-name">Invitation to Heaven</h3>
+            <span class="m-id">#643</span>
+          </header>
+          <div class="m-stats">
+            <span class="stat" title="Vagues"><b>12</b> vagues</span>
+            <span class="stat" title="Ennemis au total"><b>42</b> ennemis</span>
+            <span class="stat energy" title="Énergie"><b>15</b> én.</span>
+          </div>
+          <div class="foes"><span class="foe">Al-mi&#x27;raj</span><span class="foe">Unicorn</span><span class="foe">Sage Mimir</span><span class="foe">Archangel</span><span class="foe">Minotaur</span><span class="foe">Priestess Maria</span><span class="foe more">+36</span></div>
+        </article><article class="mission" data-s="solemn grounds palmyna 644 sage mimir orthos ramia fairy minotaur priestess maria archangel unicorn">
+          <header class="m-head">
+            <h3 class="m-name">Solemn Grounds</h3>
+            <span class="m-id">#644</span>
+          </header>
+          <div class="m-stats">
+            <span class="stat" title="Vagues"><b>12</b> vagues</span>
+            <span class="stat" title="Ennemis au total"><b>47</b> ennemis</span>
+            <span class="stat energy" title="Énergie"><b>16</b> én.</span>
+          </div>
+          <div class="foes"><span class="foe">Sage Mimir</span><span class="foe">Orthos</span><span class="foe">Ramia</span><span class="foe">Fairy</span><span class="foe">Minotaur</span><span class="foe">Priestess Maria</span><span class="foe more">+41</span></div>
+        </article><article class="mission" data-s="a familiar opponent palmyna 645 archangel unicorn priestess maria al-mi&#x27;raj great sage mimir angel maria pegasus ramia">
+          <header class="m-head">
+            <h3 class="m-name">A Familiar Opponent</h3>
+            <span class="m-id">#645</span>
+          </header>
+          <div class="m-stats">
+            <span class="stat" title="Vagues"><b>12</b> vagues</span>
+            <span class="stat" title="Ennemis au total"><b>36</b> ennemis</span>
+            <span class="stat energy" title="Énergie"><b>18</b> én.</span>
+          </div>
+          <div class="foes"><span class="foe">Archangel</span><span class="foe">Unicorn</span><span class="foe">Priestess Maria</span><span class="foe">Al-mi&#x27;raj</span><span class="foe">Great Sage Mimir</span><span class="foe">Angel Maria</span><span class="foe more">+30</span></div>
+        </article><article class="mission" data-s="the open seal palmyna 666 priestess maria archangel sage mimir ramia skeleton king orthos geomancer claris sky pirate grafl">
+          <header class="m-head">
+            <h3 class="m-name">The Open Seal</h3>
+            <span class="m-id">#666</span>
+          </header>
+          <div class="m-stats">
+            <span class="stat" title="Vagues"><b>12</b> vagues</span>
+            <span class="stat" title="Ennemis au total"><b>50</b> ennemis</span>
+            <span class="stat energy" title="Énergie"><b>20</b> én.</span>
+          </div>
+          <div class="foes"><span class="foe">Priestess Maria</span><span class="foe">Archangel</span><span class="foe">Sage Mimir</span><span class="foe">Ramia</span><span class="foe">Skeleton King</span><span class="foe">Orthos</span><span class="foe more">+44</span></div>
+        </article></div>
+    </section><section class="zone" data-zone="lizeria">
+      <div class="z-head"><h2>Lizeria</h2><span class="z-count">14</span></div>
+      <div class="grid"><article class="mission" data-s="the path begins lizeria 700 salamander orc warlock liza cerberus ifrit rantoul dwarf sylph">
+          <header class="m-head">
+            <h3 class="m-name">The Path Begins</h3>
+            <span class="m-id">#700</span>
+          </header>
+          <div class="m-stats">
+            <span class="stat" title="Vagues"><b>7</b> vagues</span>
+            <span class="stat" title="Ennemis au total"><b>22</b> ennemis</span>
+            <span class="stat energy" title="Énergie"><b>12</b> én.</span>
+          </div>
+          <div class="foes"><span class="foe">Salamander</span><span class="foe">Orc</span><span class="foe">Warlock Liza</span><span class="foe">Cerberus</span><span class="foe">Ifrit</span><span class="foe">Rantoul</span><span class="foe more">+16</span></div>
+        </article><article class="mission" data-s="where empires meet lizeria 701 gambler zeul magician lily time mage claris sylph empusa high dancer may scylla legtos">
+          <header class="m-head">
+            <h3 class="m-name">Where Empires Meet</h3>
+            <span class="m-id">#701</span>
+          </header>
+          <div class="m-stats">
+            <span class="stat" title="Vagues"><b>7</b> vagues</span>
+            <span class="stat" title="Ennemis au total"><b>20</b> ennemis</span>
+            <span class="stat energy" title="Énergie"><b>12</b> én.</span>
+          </div>
+          <div class="foes"><span class="foe">Gambler Zeul</span><span class="foe">Magician Lily</span><span class="foe">Time Mage Claris</span><span class="foe">Sylph</span><span class="foe">Empusa</span><span class="foe">High Dancer May</span><span class="foe more">+14</span></div>
+        </article><article class="mission" data-s="grove of suspicion lizeria 702 trent dwarf earth idol water pot rantoul wendigo healer merith titania">
+          <header class="m-head">
+            <h3 class="m-name">Grove of Suspicion</h3>
+            <span class="m-id">#702</span>
+          </header>
+          <div class="m-stats">
+            <span class="stat" title="Vagues"><b>7</b> vagues</span>
+            <span class="stat" title="Ennemis au total"><b>20</b> ennemis</span>
+            <span class="stat energy" title="Énergie"><b>12</b> én.</span>
+          </div>
+          <div class="foes"><span class="foe">Trent</span><span class="foe">Dwarf</span><span class="foe">Earth Idol</span><span class="foe">Water Pot</span><span class="foe">Rantoul</span><span class="foe">Wendigo</span><span class="foe more">+14</span></div>
+        </article><article class="mission" data-s="a feast for humanoids lizeria 703 sylph empusa high dancer may hermit talos warlock liza orc poet elton time mage claris">
+          <header class="m-head">
+            <h3 class="m-name">A Feast for Humanoids</h3>
+            <span class="m-id">#703</span>
+          </header>
+          <div class="m-stats">
+            <span class="stat" title="Vagues"><b>7</b> vagues</span>
+            <span class="stat" title="Ennemis au total"><b>20</b> ennemis</span>
+            <span class="stat energy" title="Énergie"><b>12</b> én.</span>
+          </div>
+          <div class="foes"><span class="foe">Sylph</span><span class="foe">Empusa</span><span class="foe">High Dancer May</span><span class="foe">Hermit Talos</span><span class="foe">Warlock Liza</span><span class="foe">Orc</span><span class="foe more">+14</span></div>
+        </article><article class="mission" data-s="the young girl&#x27;s guardian lizeria 704 priestess maria light lord mimir shrine girl amul al-mi&#x27;raj pegasus angel maria orc rantoul">
+          <header class="m-head">
+            <h3 class="m-name">The Young Girl&#x27;s Guardian</h3>
+            <span class="m-id">#704</span>
+          </header>
+          <div class="m-stats">
+            <span class="stat" title="Vagues"><b>9</b> vagues</span>
+            <span class="stat" title="Ennemis au total"><b>29</b> ennemis</span>
+            <span class="stat energy" title="Énergie"><b>15</b> én.</span>
+          </div>
+          <div class="foes"><span class="foe">Priestess Maria</span><span class="foe">Light Lord Mimir</span><span class="foe">Shrine Girl Amul</span><span class="foe">Al-mi&#x27;raj</span><span class="foe">Pegasus</span><span class="foe">Angel Maria</span><span class="foe more">+23</span></div>
+        </article><article class="mission" data-s="the giant&#x27;s dream lizeria 705 imp gambler zeul magician lily orc wendigo hermit talos lilin zahhak">
+          <header class="m-head">
+            <h3 class="m-name">The Giant&#x27;s Dream</h3>
+            <span class="m-id">#705</span>
+          </header>
+          <div class="m-stats">
+            <span class="stat" title="Vagues"><b>9</b> vagues</span>
+            <span class="stat" title="Ennemis au total"><b>28</b> ennemis</span>
+            <span class="stat energy" title="Énergie"><b>15</b> én.</span>
+          </div>
+          <div class="foes"><span class="foe">Imp</span><span class="foe">Gambler Zeul</span><span class="foe">Magician Lily</span><span class="foe">Orc</span><span class="foe">Wendigo</span><span class="foe">Hermit Talos</span><span class="foe more">+22</span></div>
+        </article><article class="mission" data-s="the ash-covered pass lizeria 710 hermit talos high dancer may magician lily warlock liza salamander ifrit orc thunderbird">
+          <header class="m-head">
+            <h3 class="m-name">The Ash-Covered Pass</h3>
+            <span class="m-id">#710</span>
+          </header>
+          <div class="m-stats">
+            <span class="stat" title="Vagues"><b>8</b> vagues</span>
+            <span class="stat" title="Ennemis au total"><b>22</b> ennemis</span>
+            <span class="stat energy" title="Énergie"><b>14</b> én.</span>
+          </div>
+          <div class="foes"><span class="foe">Hermit Talos</span><span class="foe">High Dancer May</span><span class="foe">Magician Lily</span><span class="foe">Warlock Liza</span><span class="foe">Salamander</span><span class="foe">Ifrit</span><span class="foe more">+16</span></div>
+        </article><article class="mission" data-s="gate of rejection lizeria 770 cerberus empusa black rose elize hermit talos poet elton high dancer may shrine girl amul salamander">
+          <header class="m-head">
+            <h3 class="m-name">Gate of Rejection</h3>
+            <span class="m-id">#770</span>
+          </header>
+          <div class="m-stats">
+            <span class="stat" title="Vagues"><b>10</b> vagues</span>
+            <span class="stat" title="Ennemis au total"><b>34</b> ennemis</span>
+            <span class="stat energy" title="Énergie"><b>16</b> én.</span>
+          </div>
+          <div class="foes"><span class="foe">Cerberus</span><span class="foe">Empusa</span><span class="foe">Black Rose Elize</span><span class="foe">Hermit Talos</span><span class="foe">Poet Elton</span><span class="foe">High Dancer May</span><span class="foe more">+28</span></div>
+        </article><article class="mission" data-s="hall of annihilation lizeria 771 pegasus al-mi&#x27;raj gambler zeul salamander wendigo empusa lilin hermit talos">
+          <header class="m-head">
+            <h3 class="m-name">Hall of Annihilation</h3>
+            <span class="m-id">#771</span>
+          </header>
+          <div class="m-stats">
+            <span class="stat" title="Vagues"><b>10</b> vagues</span>
+            <span class="stat" title="Ennemis au total"><b>36</b> ennemis</span>
+            <span class="stat energy" title="Énergie"><b>16</b> én.</span>
+          </div>
+          <div class="foes"><span class="foe">Pegasus</span><span class="foe">Al-mi&#x27;raj</span><span class="foe">Gambler Zeul</span><span class="foe">Salamander</span><span class="foe">Wendigo</span><span class="foe">Empusa</span><span class="foe more">+30</span></div>
+        </article><article class="mission" data-s="stairway to extinction lizeria 772 warlock liza cyclops magician lily empusa sylph high dancer may cerberus orc">
+          <header class="m-head">
+            <h3 class="m-name">Stairway to Extinction</h3>
+            <span class="m-id">#772</span>
+          </header>
+          <div class="m-stats">
+            <span class="stat" title="Vagues"><b>10</b> vagues</span>
+            <span class="stat" title="Ennemis au total"><b>32</b> ennemis</span>
+            <span class="stat energy" title="Énergie"><b>16</b> én.</span>
+          </div>
+          <div class="foes"><span class="foe">Warlock Liza</span><span class="foe">Cyclops</span><span class="foe">Magician Lily</span><span class="foe">Empusa</span><span class="foe">Sylph</span><span class="foe">High Dancer May</span><span class="foe more">+26</span></div>
+        </article><article class="mission" data-s="corridor of ruin lizeria 773 orc rantoul dwarf al-mi&#x27;raj priestess maria light lord mimir trent time mage claris">
+          <header class="m-head">
+            <h3 class="m-name">Corridor of Ruin</h3>
+            <span class="m-id">#773</span>
+          </header>
+          <div class="m-stats">
+            <span class="stat" title="Vagues"><b>10</b> vagues</span>
+            <span class="stat" title="Ennemis au total"><b>36</b> ennemis</span>
+            <span class="stat energy" title="Énergie"><b>16</b> én.</span>
+          </div>
+          <div class="foes"><span class="foe">Orc</span><span class="foe">Rantoul</span><span class="foe">Dwarf</span><span class="foe">Al-mi&#x27;raj</span><span class="foe">Priestess Maria</span><span class="foe">Light Lord Mimir</span><span class="foe more">+30</span></div>
+        </article><article class="mission" data-s="period of mortality lizeria 774 light lord mimir al-mi&#x27;raj shrine girl amul scylla wendigo orc magician lily imp">
+          <header class="m-head">
+            <h3 class="m-name">Period of Mortality</h3>
+            <span class="m-id">#774</span>
+          </header>
+          <div class="m-stats">
+            <span class="stat" title="Vagues"><b>11</b> vagues</span>
+            <span class="stat" title="Ennemis au total"><b>33</b> ennemis</span>
+            <span class="stat energy" title="Énergie"><b>18</b> én.</span>
+          </div>
+          <div class="foes"><span class="foe">Light Lord Mimir</span><span class="foe">Al-mi&#x27;raj</span><span class="foe">Shrine Girl Amul</span><span class="foe">Scylla</span><span class="foe">Wendigo</span><span class="foe">Orc</span><span class="foe more">+27</span></div>
+        </article><article class="mission" data-s="extermination barrier lizeria 775 djin dwarf empusa hermit talos poet elton high dancer may shrine girl amul cyclops">
+          <header class="m-head">
+            <h3 class="m-name">Extermination Barrier</h3>
+            <span class="m-id">#775</span>
+          </header>
+          <div class="m-stats">
+            <span class="stat" title="Vagues"><b>11</b> vagues</span>
+            <span class="stat" title="Ennemis au total"><b>36</b> ennemis</span>
+            <span class="stat energy" title="Énergie"><b>19</b> én.</span>
+          </div>
+          <div class="foes"><span class="foe">Djin</span><span class="foe">Dwarf</span><span class="foe">Empusa</span><span class="foe">Hermit Talos</span><span class="foe">Poet Elton</span><span class="foe">High Dancer May</span><span class="foe more">+30</span></div>
+        </article><article class="mission" data-s="the corpse producing machine lizeria 776 priestess maria imp gambler zeul djin high dancer may cyclops black rose elize scylla">
+          <header class="m-head">
+            <h3 class="m-name">The Corpse Producing Machine</h3>
+            <span class="m-id">#776</span>
+          </header>
+          <div class="m-stats">
+            <span class="stat" title="Vagues"><b>12</b> vagues</span>
+            <span class="stat" title="Ennemis au total"><b>36</b> ennemis</span>
+            <span class="stat energy" title="Énergie"><b>21</b> én.</span>
+          </div>
+          <div class="foes"><span class="foe">Priestess Maria</span><span class="foe">Imp</span><span class="foe">Gambler Zeul</span><span class="foe">Djin</span><span class="foe">High Dancer May</span><span class="foe">Cyclops</span><span class="foe more">+30</span></div>
+        </article></div>
+    </section><section class="zone" data-zone="ryvern">
+      <div class="z-head"><h2>Ryvern</h2><span class="z-count">15</span></div>
+      <div class="grid"><article class="mission" data-s="battle in a new land ryvern 800 head thief leon hobgoblin salamander orc cerberus warlock liza ogre mountaineer talos">
+          <header class="m-head">
+            <h3 class="m-name">Battle in a New Land</h3>
+            <span class="m-id">#800</span>
+          </header>
+          <div class="m-stats">
+            <span class="stat" title="Vagues"><b>9</b> vagues</span>
+            <span class="stat" title="Ennemis au total"><b>27</b> ennemis</span>
+            <span class="stat energy" title="Énergie"><b>12</b> én.</span>
+          </div>
+          <div class="foes"><span class="foe">Head Thief Leon</span><span class="foe">Hobgoblin</span><span class="foe">Salamander</span><span class="foe">Orc</span><span class="foe">Cerberus</span><span class="foe">Warlock Liza</span><span class="foe more">+21</span></div>
+        </article><article class="mission" data-s="the steamy path ryvern 801 salamander hobgoblin head thief leon orc hermit talos redcap warlock liza ifrit">
+          <header class="m-head">
+            <h3 class="m-name">The Steamy Path</h3>
+            <span class="m-id">#801</span>
+          </header>
+          <div class="m-stats">
+            <span class="stat" title="Vagues"><b>9</b> vagues</span>
+            <span class="stat" title="Ennemis au total"><b>30</b> ennemis</span>
+            <span class="stat energy" title="Énergie"><b>12</b> én.</span>
+          </div>
+          <div class="foes"><span class="foe">Salamander</span><span class="foe">Hobgoblin</span><span class="foe">Head Thief Leon</span><span class="foe">Orc</span><span class="foe">Hermit Talos</span><span class="foe">Redcap</span><span class="foe more">+24</span></div>
+        </article><article class="mission" data-s="blazing earth ryvern 802 hobgoblin redcap head thief leon orc hermit talos cerberus firedrake dalimaone">
+          <header class="m-head">
+            <h3 class="m-name">Blazing Earth</h3>
+            <span class="m-id">#802</span>
+          </header>
+          <div class="m-stats">
+            <span class="stat" title="Vagues"><b>10</b> vagues</span>
+            <span class="stat" title="Ennemis au total"><b>34</b> ennemis</span>
+            <span class="stat energy" title="Énergie"><b>13</b> én.</span>
+          </div>
+          <div class="foes"><span class="foe">Hobgoblin</span><span class="foe">Redcap</span><span class="foe">Head Thief Leon</span><span class="foe">Orc</span><span class="foe">Hermit Talos</span><span class="foe">Cerberus</span><span class="foe more">+28</span></div>
+        </article><article class="mission" data-s="swift blowing flames ryvern 803 salamander hobgoblin orc cerberus warlock liza pyromancer liza hermit talos head thief leon">
+          <header class="m-head">
+            <h3 class="m-name">Swift Blowing Flames</h3>
+            <span class="m-id">#803</span>
+          </header>
+          <div class="m-stats">
+            <span class="stat" title="Vagues"><b>10</b> vagues</span>
+            <span class="stat" title="Ennemis au total"><b>31</b> ennemis</span>
+            <span class="stat energy" title="Énergie"><b>13</b> én.</span>
+          </div>
+          <div class="foes"><span class="foe">Salamander</span><span class="foe">Hobgoblin</span><span class="foe">Orc</span><span class="foe">Cerberus</span><span class="foe">Warlock Liza</span><span class="foe">Pyromancer Liza</span><span class="foe more">+25</span></div>
+        </article><article class="mission" data-s="the roar in the forest ryvern 823 leshy polevik time mage claris titania time lord claris poet elton trent gun king douglas">
+          <header class="m-head">
+            <h3 class="m-name">The Roar in the Forest</h3>
+            <span class="m-id">#823</span>
+          </header>
+          <div class="m-stats">
+            <span class="stat" title="Vagues"><b>10</b> vagues</span>
+            <span class="stat" title="Ennemis au total"><b>31</b> ennemis</span>
+            <span class="stat energy" title="Énergie"><b>13</b> én.</span>
+          </div>
+          <div class="foes"><span class="foe">Leshy</span><span class="foe">Polevik</span><span class="foe">Time Mage Claris</span><span class="foe">Titania</span><span class="foe">Time Lord Claris</span><span class="foe">Poet Elton</span><span class="foe more">+25</span></div>
+        </article><article class="mission" data-s="the sal trees ryvern 824 poet elton polevik head bandit zaza dwarf leshy titania time mage claris dryad">
+          <header class="m-head">
+            <h3 class="m-name">The Sal Trees</h3>
+            <span class="m-id">#824</span>
+          </header>
+          <div class="m-stats">
+            <span class="stat" title="Vagues"><b>11</b> vagues</span>
+            <span class="stat" title="Ennemis au total"><b>31</b> ennemis</span>
+            <span class="stat energy" title="Énergie"><b>15</b> én.</span>
+          </div>
+          <div class="foes"><span class="foe">Poet Elton</span><span class="foe">Polevik</span><span class="foe">Head Bandit Zaza</span><span class="foe">Dwarf</span><span class="foe">Leshy</span><span class="foe">Titania</span><span class="foe more">+25</span></div>
+        </article><article class="mission" data-s="the thunder troupe ryvern 830 wild cat parmi aero empusa sky boss grafl ocypete sylph high dancer may gorgon">
+          <header class="m-head">
+            <h3 class="m-name">The Thunder Troupe</h3>
+            <span class="m-id">#830</span>
+          </header>
+          <div class="m-stats">
+            <span class="stat" title="Vagues"><b>9</b> vagues</span>
+            <span class="stat" title="Ennemis au total"><b>31</b> ennemis</span>
+            <span class="stat energy" title="Énergie"><b>12</b> én.</span>
+          </div>
+          <div class="foes"><span class="foe">Wild Cat Parmi</span><span class="foe">Aero</span><span class="foe">Empusa</span><span class="foe">Sky Boss Grafl</span><span class="foe">Ocypete</span><span class="foe">Sylph</span><span class="foe more">+25</span></div>
+        </article><article class="mission" data-s="secret of the blade ryvern 831 ocypete empusa sky boss grafl wild cat parmi aero high dancer may djin cyclops">
+          <header class="m-head">
+            <h3 class="m-name">Secret of the Blade</h3>
+            <span class="m-id">#831</span>
+          </header>
+          <div class="m-stats">
+            <span class="stat" title="Vagues"><b>9</b> vagues</span>
+            <span class="stat" title="Ennemis au total"><b>26</b> ennemis</span>
+            <span class="stat energy" title="Énergie"><b>12</b> én.</span>
+          </div>
+          <div class="foes"><span class="foe">Ocypete</span><span class="foe">Empusa</span><span class="foe">Sky Boss Grafl</span><span class="foe">Wild Cat Parmi</span><span class="foe">Aero</span><span class="foe">High Dancer May</span><span class="foe more">+20</span></div>
+        </article><article class="mission" data-s="that which haunts the ruins ryvern 832 wild cat parmi aero ocypete empusa thunderbird cyclops sky boss grafl zazabis">
+          <header class="m-head">
+            <h3 class="m-name">That Which Haunts the Ruins</h3>
+            <span class="m-id">#832</span>
+          </header>
+          <div class="m-stats">
+            <span class="stat" title="Vagues"><b>10</b> vagues</span>
+            <span class="stat" title="Ennemis au total"><b>37</b> ennemis</span>
+            <span class="stat energy" title="Énergie"><b>13</b> én.</span>
+          </div>
+          <div class="foes"><span class="foe">Wild Cat Parmi</span><span class="foe">Aero</span><span class="foe">Ocypete</span><span class="foe">Empusa</span><span class="foe">Thunderbird</span><span class="foe">Cyclops</span><span class="foe more">+31</span></div>
+        </article><article class="mission" data-s="fall of the lightning fortress ryvern 833 wild cat parmi sylph ocypete aero high dancer may cyclops thunderbird princess emilia">
+          <header class="m-head">
+            <h3 class="m-name">Fall of the Lightning Fortress</h3>
+            <span class="m-id">#833</span>
+          </header>
+          <div class="m-stats">
+            <span class="stat" title="Vagues"><b>10</b> vagues</span>
+            <span class="stat" title="Ennemis au total"><b>31</b> ennemis</span>
+            <span class="stat energy" title="Énergie"><b>13</b> én.</span>
+          </div>
+          <div class="foes"><span class="foe">Wild Cat Parmi</span><span class="foe">Sylph</span><span class="foe">Ocypete</span><span class="foe">Aero</span><span class="foe">High Dancer May</span><span class="foe">Cyclops</span><span class="foe more">+25</span></div>
+        </article><article class="mission" data-s="the spear of justice ryvern 834 ocypete cyclops wild cat parmi sky boss grafl empusa aero thunderbird high dancer may">
+          <header class="m-head">
+            <h3 class="m-name">The Spear of Justice</h3>
+            <span class="m-id">#834</span>
+          </header>
+          <div class="m-stats">
+            <span class="stat" title="Vagues"><b>11</b> vagues</span>
+            <span class="stat" title="Ennemis au total"><b>31</b> ennemis</span>
+            <span class="stat energy" title="Énergie"><b>15</b> én.</span>
+          </div>
+          <div class="foes"><span class="foe">Ocypete</span><span class="foe">Cyclops</span><span class="foe">Wild Cat Parmi</span><span class="foe">Sky Boss Grafl</span><span class="foe">Empusa</span><span class="foe">Aero</span><span class="foe more">+25</span></div>
+        </article><article class="mission" data-s="the pegasus maiden ryvern 840 pegasus priestess maria azrael shrine girl amul archangel light lord mimir cait sith al-mi&#x27;raj">
+          <header class="m-head">
+            <h3 class="m-name">The Pegasus Maiden</h3>
+            <span class="m-id">#840</span>
+          </header>
+          <div class="m-stats">
+            <span class="stat" title="Vagues"><b>10</b> vagues</span>
+            <span class="stat" title="Ennemis au total"><b>35</b> ennemis</span>
+            <span class="stat energy" title="Énergie"><b>13</b> én.</span>
+          </div>
+          <div class="foes"><span class="foe">Pegasus</span><span class="foe">Priestess Maria</span><span class="foe">Azrael</span><span class="foe">Shrine Girl Amul</span><span class="foe">Archangel</span><span class="foe">Light Lord Mimir</span><span class="foe more">+29</span></div>
+        </article><article class="mission" data-s="the foreboding gunshot ryvern 841 pegasus al-mi&#x27;raj azrael archangel angel maria light lord mimir shrine girl amul pistol god heidt">
+          <header class="m-head">
+            <h3 class="m-name">The Foreboding Gunshot</h3>
+            <span class="m-id">#841</span>
+          </header>
+          <div class="m-stats">
+            <span class="stat" title="Vagues"><b>10</b> vagues</span>
+            <span class="stat" title="Ennemis au total"><b>31</b> ennemis</span>
+            <span class="stat energy" title="Énergie"><b>13</b> én.</span>
+          </div>
+          <div class="foes"><span class="foe">Pegasus</span><span class="foe">Al-mi&#x27;raj</span><span class="foe">Azrael</span><span class="foe">Archangel</span><span class="foe">Angel Maria</span><span class="foe">Light Lord Mimir</span><span class="foe more">+25</span></div>
+        </article><article class="mission" data-s="heavenly intent ryvern 842 azrael pegasus al-mi&#x27;raj light lord mimir shrine girl amul valkyrie archangel legendary jona ">
+          <header class="m-head">
+            <h3 class="m-name">Heavenly Intent</h3>
+            <span class="m-id">#842</span>
+          </header>
+          <div class="m-stats">
+            <span class="stat" title="Vagues"><b>11</b> vagues</span>
+            <span class="stat" title="Ennemis au total"><b>35</b> ennemis</span>
+            <span class="stat energy" title="Énergie"><b>15</b> én.</span>
+          </div>
+          <div class="foes"><span class="foe">Azrael</span><span class="foe">Pegasus</span><span class="foe">Al-mi&#x27;raj</span><span class="foe">Light Lord Mimir</span><span class="foe">Shrine Girl Amul</span><span class="foe">Valkyrie</span><span class="foe more">+29</span></div>
+        </article><article class="mission" data-s="the warrior and the dragon ryvern 843 priestess maria azrael al-mi&#x27;raj archangel pegasus valkyrie shrine girl amul light lord mimir">
+          <header class="m-head">
+            <h3 class="m-name">The Warrior and the Dragon</h3>
+            <span class="m-id">#843</span>
+          </header>
+          <div class="m-stats">
+            <span class="stat" title="Vagues"><b>11</b> vagues</span>
+            <span class="stat" title="Ennemis au total"><b>35</b> ennemis</span>
+            <span class="stat energy" title="Énergie"><b>15</b> én.</span>
+          </div>
+          <div class="foes"><span class="foe">Priestess Maria</span><span class="foe">Azrael</span><span class="foe">Al-mi&#x27;raj</span><span class="foe">Archangel</span><span class="foe">Pegasus</span><span class="foe">Valkyrie</span><span class="foe more">+29</span></div>
+        </article></div>
+    </section><section class="zone" data-zone="agni">
+      <div class="z-head"><h2>Agni</h2><span class="z-count">10</span></div>
+      <div class="grid"><article class="mission" data-s="serenade in the waves agni 910 lizard man black rose elize plunderer verica scylla rantoul sahuagin siren leviathan">
+          <header class="m-head">
+            <h3 class="m-name">Serenade in the Waves</h3>
+            <span class="m-id">#910</span>
+          </header>
+          <div class="m-stats">
+            <span class="stat" title="Vagues"><b>9</b> vagues</span>
+            <span class="stat" title="Ennemis au total"><b>30</b> ennemis</span>
+            <span class="stat energy" title="Énergie"><b>12</b> én.</span>
+          </div>
+          <div class="foes"><span class="foe">Lizard Man</span><span class="foe">Black Rose Elize</span><span class="foe">Plunderer Verica</span><span class="foe">Scylla</span><span class="foe">Rantoul</span><span class="foe">Sahuagin</span><span class="foe more">+24</span></div>
+        </article><article class="mission" data-s="the shining ice flow agni 911 sahuagin lizard man wendigo hrungnir legtos plunderer verica rantoul scylla">
+          <header class="m-head">
+            <h3 class="m-name">The Shining Ice Flow</h3>
+            <span class="m-id">#911</span>
+          </header>
+          <div class="m-stats">
+            <span class="stat" title="Vagues"><b>9</b> vagues</span>
+            <span class="stat" title="Ennemis au total"><b>27</b> ennemis</span>
+            <span class="stat energy" title="Énergie"><b>12</b> én.</span>
+          </div>
+          <div class="foes"><span class="foe">Sahuagin</span><span class="foe">Lizard Man</span><span class="foe">Wendigo</span><span class="foe">Hrungnir</span><span class="foe">Legtos</span><span class="foe">Plunderer Verica</span><span class="foe more">+21</span></div>
+        </article><article class="mission" data-s="the limits of wisdom and courage agni 912 lizard man plunderer verica black rose elize scylla sahuagin frozen rose elize sea prince verica bishop merith">
+          <header class="m-head">
+            <h3 class="m-name">The Limits of Wisdom and Courage</h3>
+            <span class="m-id">#912</span>
+          </header>
+          <div class="m-stats">
+            <span class="stat" title="Vagues"><b>10</b> vagues</span>
+            <span class="stat" title="Ennemis au total"><b>34</b> ennemis</span>
+            <span class="stat energy" title="Énergie"><b>13</b> én.</span>
+          </div>
+          <div class="foes"><span class="foe">Lizard Man</span><span class="foe">Plunderer Verica</span><span class="foe">Black Rose Elize</span><span class="foe">Scylla</span><span class="foe">Sahuagin</span><span class="foe">Frozen Rose Elize</span><span class="foe more">+28</span></div>
+        </article><article class="mission" data-s="unwavering slash agni 913 wendigo healer merith black rose elize plunderer verica rantoul lizard man sahuagin undine">
+          <header class="m-head">
+            <h3 class="m-name">Unwavering Slash</h3>
+            <span class="m-id">#913</span>
+          </header>
+          <div class="m-stats">
+            <span class="stat" title="Vagues"><b>10</b> vagues</span>
+            <span class="stat" title="Ennemis au total"><b>31</b> ennemis</span>
+            <span class="stat energy" title="Énergie"><b>14</b> én.</span>
+          </div>
+          <div class="foes"><span class="foe">Wendigo</span><span class="foe">Healer Merith</span><span class="foe">Black Rose Elize</span><span class="foe">Plunderer Verica</span><span class="foe">Rantoul</span><span class="foe">Lizard Man</span><span class="foe more">+25</span></div>
+        </article><article class="mission" data-s="the ice that binds agni 914 black rose elize sahuagin lizard man water idol water pot healer merith plunderer verica wendigo">
+          <header class="m-head">
+            <h3 class="m-name">The Ice that Binds</h3>
+            <span class="m-id">#914</span>
+          </header>
+          <div class="m-stats">
+            <span class="stat" title="Vagues"><b>11</b> vagues</span>
+            <span class="stat" title="Ennemis au total"><b>30</b> ennemis</span>
+            <span class="stat energy" title="Énergie"><b>15</b> én.</span>
+          </div>
+          <div class="foes"><span class="foe">Black Rose Elize</span><span class="foe">Sahuagin</span><span class="foe">Lizard Man</span><span class="foe">Water Idol</span><span class="foe">Water Pot</span><span class="foe">Healer Merith</span><span class="foe more">+24</span></div>
+        </article><article class="mission" data-s="overwhelming green agni 920 time mage claris trent leshy titania polevik poet elton head bandit zaza high elf">
+          <header class="m-head">
+            <h3 class="m-name">Overwhelming Green</h3>
+            <span class="m-id">#920</span>
+          </header>
+          <div class="m-stats">
+            <span class="stat" title="Vagues"><b>9</b> vagues</span>
+            <span class="stat" title="Ennemis au total"><b>27</b> ennemis</span>
+            <span class="stat energy" title="Énergie"><b>12</b> én.</span>
+          </div>
+          <div class="foes"><span class="foe">Time Mage Claris</span><span class="foe">Trent</span><span class="foe">Leshy</span><span class="foe">Titania</span><span class="foe">Polevik</span><span class="foe">Poet Elton</span><span class="foe more">+21</span></div>
+        </article><article class="mission" data-s="balance of power agni 921 polevik leshy head bandit zaza trent dwarf titania time mage claris dwarf prince">
+          <header class="m-head">
+            <h3 class="m-name">Balance of Power</h3>
+            <span class="m-id">#921</span>
+          </header>
+          <div class="m-stats">
+            <span class="stat" title="Vagues"><b>9</b> vagues</span>
+            <span class="stat" title="Ennemis au total"><b>26</b> ennemis</span>
+            <span class="stat energy" title="Énergie"><b>12</b> én.</span>
+          </div>
+          <div class="foes"><span class="foe">Polevik</span><span class="foe">Leshy</span><span class="foe">Head Bandit Zaza</span><span class="foe">Trent</span><span class="foe">Dwarf</span><span class="foe">Titania</span><span class="foe more">+20</span></div>
+        </article><article class="mission" data-s="noble roar agni 922 polevik time mage claris poet elton leshy dwarf bard elton wild bandit zaza time lord claris">
+          <header class="m-head">
+            <h3 class="m-name">Noble Roar</h3>
+            <span class="m-id">#922</span>
+          </header>
+          <div class="m-stats">
+            <span class="stat" title="Vagues"><b>10</b> vagues</span>
+            <span class="stat" title="Ennemis au total"><b>32</b> ennemis</span>
+            <span class="stat energy" title="Énergie"><b>13</b> én.</span>
+          </div>
+          <div class="foes"><span class="foe">Polevik</span><span class="foe">Time Mage Claris</span><span class="foe">Poet Elton</span><span class="foe">Leshy</span><span class="foe">Dwarf</span><span class="foe">Bard Elton</span><span class="foe more">+26</span></div>
+        </article><article class="mission" data-s="the power that protects agni 923 trent dwarf leshy poet elton head bandit zaza polevik titania dryad">
+          <header class="m-head">
+            <h3 class="m-name">The Power that Protects</h3>
+            <span class="m-id">#923</span>
+          </header>
+          <div class="m-stats">
+            <span class="stat" title="Vagues"><b>10</b> vagues</span>
+            <span class="stat" title="Ennemis au total"><b>33</b> ennemis</span>
+            <span class="stat energy" title="Énergie"><b>14</b> én.</span>
+          </div>
+          <div class="foes"><span class="foe">Trent</span><span class="foe">Dwarf</span><span class="foe">Leshy</span><span class="foe">Poet Elton</span><span class="foe">Head Bandit Zaza</span><span class="foe">Polevik</span><span class="foe more">+27</span></div>
+        </article><article class="mission" data-s="the light that vanquishes evil agni 943 azrael al-mi&#x27;raj pegasus light lord mimir shrine girl amul priestess maria archangel valkyrie">
+          <header class="m-head">
+            <h3 class="m-name">The Light that Vanquishes Evil</h3>
+            <span class="m-id">#943</span>
+          </header>
+          <div class="m-stats">
+            <span class="stat" title="Vagues"><b>11</b> vagues</span>
+            <span class="stat" title="Ennemis au total"><b>35</b> ennemis</span>
+            <span class="stat energy" title="Énergie"><b>15</b> én.</span>
+          </div>
+          <div class="foes"><span class="foe">Azrael</span><span class="foe">Al-mi&#x27;raj</span><span class="foe">Pegasus</span><span class="foe">Light Lord Mimir</span><span class="foe">Shrine Girl Amul</span><span class="foe">Priestess Maria</span><span class="foe more">+29</span></div>
+        </article></div>
+    </section><section class="zone" data-zone="100001">
+      <div class="z-head"><h2>Événements &amp; Vortex</h2><span class="z-count">12</span></div>
+      <div class="grid"><article class="mission" data-s="garden of idols 100001 100102 rantoul water idol lilin dark idol salamander fire idol earth idol angel maria">
+          <header class="m-head">
+            <h3 class="m-name">Garden of Idols</h3>
+            <span class="m-id">#100102</span>
+          </header>
+          <div class="m-stats">
+            <span class="stat" title="Vagues"><b>5</b> vagues</span>
+            <span class="stat" title="Ennemis au total"><b>13</b> ennemis</span>
+            <span class="stat energy" title="Énergie"><b>25</b> én.</span>
+          </div>
+          <div class="foes"><span class="foe">Rantoul</span><span class="foe">Water Idol</span><span class="foe">Lilin</span><span class="foe">Dark Idol</span><span class="foe">Salamander</span><span class="foe">Fire Idol</span><span class="foe more">+7</span></div>
+        </article><article class="mission" data-s="phantom pots 100001 100103 wendigo water pot orc fire pot imp dark pot djin thunder pot">
+          <header class="m-head">
+            <h3 class="m-name">Phantom Pots</h3>
+            <span class="m-id">#100103</span>
+          </header>
+          <div class="m-stats">
+            <span class="stat" title="Vagues"><b>5</b> vagues</span>
+            <span class="stat" title="Ennemis au total"><b>15</b> ennemis</span>
+            <span class="stat energy" title="Énergie"><b>25</b> én.</span>
+          </div>
+          <div class="foes"><span class="foe">Wendigo</span><span class="foe">Water Pot</span><span class="foe">Orc</span><span class="foe">Fire Pot</span><span class="foe">Imp</span><span class="foe">Dark Pot</span><span class="foe more">+9</span></div>
+        </article><article class="mission" data-s="the box of desires lv. 1 100001 100200 goblin thief leon skeleton mimic">
+          <header class="m-head">
+            <h3 class="m-name">The Box of Desires Lv. 1</h3>
+            <span class="m-id">#100200</span>
+          </header>
+          <div class="m-stats">
+            <span class="stat" title="Vagues"><b>5</b> vagues</span>
+            <span class="stat" title="Ennemis au total"><b>13</b> ennemis</span>
+            <span class="stat energy" title="Énergie"><b>10</b> én.</span>
+          </div>
+          <div class="foes"><span class="foe">Goblin</span><span class="foe">Thief Leon</span><span class="foe">Skeleton</span><span class="foe">Mimic</span><span class="foe more">+9</span></div>
+        </article><article class="mission" data-s="the box of desires lv. 2 100001 100201 redcap skeleton king winged mimic">
+          <header class="m-head">
+            <h3 class="m-name">The Box of Desires Lv. 2</h3>
+            <span class="m-id">#100201</span>
+          </header>
+          <div class="m-stats">
+            <span class="stat" title="Vagues"><b>6</b> vagues</span>
+            <span class="stat" title="Ennemis au total"><b>13</b> ennemis</span>
+            <span class="stat energy" title="Énergie"><b>20</b> én.</span>
+          </div>
+          <div class="foes"><span class="foe">Redcap</span><span class="foe">Skeleton King</span><span class="foe">Winged Mimic</span><span class="foe more">+10</span></div>
+        </article><article class="mission" data-s="the box of desires lv. 3 100001 100202 imp orc dragon mimic">
+          <header class="m-head">
+            <h3 class="m-name">The Box of Desires Lv. 3</h3>
+            <span class="m-id">#100202</span>
+          </header>
+          <div class="m-stats">
+            <span class="stat" title="Vagues"><b>6</b> vagues</span>
+            <span class="stat" title="Ennemis au total"><b>17</b> ennemis</span>
+            <span class="stat energy" title="Énergie"><b>25</b> én.</span>
+          </div>
+          <div class="foes"><span class="foe">Imp</span><span class="foe">Orc</span><span class="foe">Dragon Mimic</span><span class="foe more">+14</span></div>
+        </article><article class="mission" data-s="ruins of fire lv. 3 100001 100300 salamander witch liza redcap warlock liza orthos firedrake fire totem">
+          <header class="m-head">
+            <h3 class="m-name">Ruins of Fire Lv. 3</h3>
+            <span class="m-id">#100300</span>
+          </header>
+          <div class="m-stats">
+            <span class="stat" title="Vagues"><b>8</b> vagues</span>
+            <span class="stat" title="Ennemis au total"><b>16</b> ennemis</span>
+            <span class="stat energy" title="Énergie"><b>30</b> én.</span>
+          </div>
+          <div class="foes"><span class="foe">Salamander</span><span class="foe">Witch Liza</span><span class="foe">Redcap</span><span class="foe">Warlock Liza</span><span class="foe">Orthos</span><span class="foe">Firedrake</span><span class="foe more">+10</span></div>
+        </article><article class="mission" data-s="ruins of water lv. 3 100001 100301 sahuagin ramia priest merith healer merith undine rantoul water totem">
+          <header class="m-head">
+            <h3 class="m-name">Ruins of Water Lv. 3</h3>
+            <span class="m-id">#100301</span>
+          </header>
+          <div class="m-stats">
+            <span class="stat" title="Vagues"><b>8</b> vagues</span>
+            <span class="stat" title="Ennemis au total"><b>19</b> ennemis</span>
+            <span class="stat energy" title="Énergie"><b>30</b> én.</span>
+          </div>
+          <div class="foes"><span class="foe">Sahuagin</span><span class="foe">Ramia</span><span class="foe">Priest Merith</span><span class="foe">Healer Merith</span><span class="foe">Undine</span><span class="foe">Rantoul</span><span class="foe more">+13</span></div>
+        </article><article class="mission" data-s="ruins of earth lv. 3 100001 100302 trent geomancer claris polevik time mage claris dryad earth totem">
+          <header class="m-head">
+            <h3 class="m-name">Ruins of Earth Lv. 3</h3>
+            <span class="m-id">#100302</span>
+          </header>
+          <div class="m-stats">
+            <span class="stat" title="Vagues"><b>8</b> vagues</span>
+            <span class="stat" title="Ennemis au total"><b>15</b> ennemis</span>
+            <span class="stat energy" title="Énergie"><b>30</b> én.</span>
+          </div>
+          <div class="foes"><span class="foe">Trent</span><span class="foe">Geomancer Claris</span><span class="foe">Polevik</span><span class="foe">Time Mage Claris</span><span class="foe">Dryad</span><span class="foe">Earth Totem</span><span class="foe more">+9</span></div>
+        </article><article class="mission" data-s="ruins of thunder lv. 3 100001 100303 sylph dancer may aero high dancer may thunderbird minotaur thunder totem">
+          <header class="m-head">
+            <h3 class="m-name">Ruins of Thunder Lv. 3</h3>
+            <span class="m-id">#100303</span>
+          </header>
+          <div class="m-stats">
+            <span class="stat" title="Vagues"><b>8</b> vagues</span>
+            <span class="stat" title="Ennemis au total"><b>16</b> ennemis</span>
+            <span class="stat energy" title="Énergie"><b>30</b> én.</span>
+          </div>
+          <div class="foes"><span class="foe">Sylph</span><span class="foe">Dancer May</span><span class="foe">Aero</span><span class="foe">High Dancer May</span><span class="foe">Thunderbird</span><span class="foe">Minotaur</span><span class="foe more">+10</span></div>
+        </article><article class="mission" data-s="ruins of miracles lv. 4 100001 100304 thief leon lilin geomancer claris unicorn rantoul skeleton king dwarf light totem">
+          <header class="m-head">
+            <h3 class="m-name">Ruins of Miracles Lv. 4</h3>
+            <span class="m-id">#100304</span>
+          </header>
+          <div class="m-stats">
+            <span class="stat" title="Vagues"><b>5</b> vagues</span>
+            <span class="stat" title="Ennemis au total"><b>12</b> ennemis</span>
+            <span class="stat energy" title="Énergie"><b>50</b> én.</span>
+          </div>
+          <div class="foes"><span class="foe">Thief Leon</span><span class="foe">Lilin</span><span class="foe">Geomancer Claris</span><span class="foe">Unicorn</span><span class="foe">Rantoul</span><span class="foe">Skeleton King</span><span class="foe more">+6</span></div>
+        </article><article class="mission" data-s="gold valley lv. 2 100001 100501 minotaur ramia jewel ghost orthos fairy cerberus jewel king">
+          <header class="m-head">
+            <h3 class="m-name">Gold Valley Lv. 2</h3>
+            <span class="m-id">#100501</span>
+          </header>
+          <div class="m-stats">
+            <span class="stat" title="Vagues"><b>5</b> vagues</span>
+            <span class="stat" title="Ennemis au total"><b>21</b> ennemis</span>
+            <span class="stat energy" title="Énergie"><b>20</b> én.</span>
+          </div>
+          <div class="foes"><span class="foe">Minotaur</span><span class="foe">Ramia</span><span class="foe">Jewel Ghost</span><span class="foe">Orthos</span><span class="foe">Fairy</span><span class="foe">Cerberus</span><span class="foe more">+15</span></div>
+        </article><article class="mission" data-s="gold valley lv. 3 100001 100502 redcap polevik sahuagin aero jewel ghost ramia fairy minotaur">
+          <header class="m-head">
+            <h3 class="m-name">Gold Valley Lv. 3</h3>
+            <span class="m-id">#100502</span>
+          </header>
+          <div class="m-stats">
+            <span class="stat" title="Vagues"><b>5</b> vagues</span>
+            <span class="stat" title="Ennemis au total"><b>23</b> ennemis</span>
+            <span class="stat energy" title="Énergie"><b>30</b> én.</span>
+          </div>
+          <div class="foes"><span class="foe">Redcap</span><span class="foe">Polevik</span><span class="foe">Sahuagin</span><span class="foe">Aero</span><span class="foe">Jewel Ghost</span><span class="foe">Ramia</span><span class="foe more">+17</span></div>
+        </article></div>
+    </section><section class="zone" data-zone="ruins of light and dark">
+      <div class="z-head"><h2>Ruins of Light and Dark</h2><span class="z-count">1</span></div>
+      <div class="grid"><article class="mission" data-s="ruins of dark ruins of light and dark 100311 medusa skeleton king lilin sorceress lily magician lily vampire dark totem">
+          <header class="m-head">
+            <h3 class="m-name">Ruins of Dark</h3>
+            <span class="m-id">#100311</span>
+          </header>
+          <div class="m-stats">
+            <span class="stat" title="Vagues"><b>8</b> vagues</span>
+            <span class="stat" title="Ennemis au total"><b>19</b> ennemis</span>
+            <span class="stat energy" title="Énergie"><b>30</b> én.</span>
+          </div>
+          <div class="foes"><span class="foe">Medusa</span><span class="foe">Skeleton King</span><span class="foe">Lilin</span><span class="foe">Sorceress Lily</span><span class="foe">Magician Lily</span><span class="foe">Vampire</span><span class="foe more">+13</span></div>
+        </article></div>
+    </section><section class="zone" data-zone="parade garden">
+      <div class="z-head"><h2>Parade Garden</h2><span class="z-count">14</span></div>
+      <div class="grid"><article class="mission" data-s="metal parade! parade garden 100600 water ghost water king thunder ghost thunder king earth ghost fire ghost light ghost fire god">
+          <header class="m-head">
+            <h3 class="m-name">Metal Parade!</h3>
+            <span class="m-id">#100600</span>
+          </header>
+          <div class="m-stats">
+            <span class="stat" title="Vagues"><b>5</b> vagues</span>
+            <span class="stat" title="Ennemis au total"><b>13</b> ennemis</span>
+            <span class="stat energy" title="Énergie"><b>—</b> én.</span>
+          </div>
+          <div class="foes"><span class="foe">Water Ghost</span><span class="foe">Water King</span><span class="foe">Thunder Ghost</span><span class="foe">Thunder King</span><span class="foe">Earth Ghost</span><span class="foe">Fire Ghost</span><span class="foe more">+7</span></div>
+        </article><article class="mission" data-s="super metal parade! parade garden 100601 water god light king metal king water king water crystal">
+          <header class="m-head">
+            <h3 class="m-name">Super Metal Parade!</h3>
+            <span class="m-id">#100601</span>
+          </header>
+          <div class="m-stats">
+            <span class="stat" title="Vagues"><b>5</b> vagues</span>
+            <span class="stat" title="Ennemis au total"><b>7</b> ennemis</span>
+            <span class="stat energy" title="Énergie"><b>—</b> én.</span>
+          </div>
+          <div class="foes"><span class="foe">Water God</span><span class="foe">Light King</span><span class="foe">Metal King</span><span class="foe">Water King</span><span class="foe">Water Crystal</span><span class="foe more">+2</span></div>
+        </article><article class="mission" data-s="fire metal parade parade garden 100602 fire god fire ghost fire king">
+          <header class="m-head">
+            <h3 class="m-name">Fire Metal Parade</h3>
+            <span class="m-id">#100602</span>
+          </header>
+          <div class="m-stats">
+            <span class="stat" title="Vagues"><b>5</b> vagues</span>
+            <span class="stat" title="Ennemis au total"><b>12</b> ennemis</span>
+            <span class="stat energy" title="Énergie"><b>—</b> én.</span>
+          </div>
+          <div class="foes"><span class="foe">Fire God</span><span class="foe">Fire Ghost</span><span class="foe">Fire King</span><span class="foe more">+9</span></div>
+        </article><article class="mission" data-s="water metal parade parade garden 100603 water king water ghost water god">
+          <header class="m-head">
+            <h3 class="m-name">Water Metal Parade</h3>
+            <span class="m-id">#100603</span>
+          </header>
+          <div class="m-stats">
+            <span class="stat" title="Vagues"><b>5</b> vagues</span>
+            <span class="stat" title="Ennemis au total"><b>11</b> ennemis</span>
+            <span class="stat energy" title="Énergie"><b>—</b> én.</span>
+          </div>
+          <div class="foes"><span class="foe">Water King</span><span class="foe">Water Ghost</span><span class="foe">Water God</span><span class="foe more">+8</span></div>
+        </article><article class="mission" data-s="earth metal parade parade garden 100604 earth ghost earth king">
+          <header class="m-head">
+            <h3 class="m-name">Earth Metal Parade</h3>
+            <span class="m-id">#100604</span>
+          </header>
+          <div class="m-stats">
+            <span class="stat" title="Vagues"><b>5</b> vagues</span>
+            <span class="stat" title="Ennemis au total"><b>13</b> ennemis</span>
+            <span class="stat energy" title="Énergie"><b>—</b> én.</span>
+          </div>
+          <div class="foes"><span class="foe">Earth Ghost</span><span class="foe">Earth King</span><span class="foe more">+11</span></div>
+        </article><article class="mission" data-s="thunder metal parade parade garden 100605 thunder ghost thunder king thunder god">
+          <header class="m-head">
+            <h3 class="m-name">Thunder Metal Parade</h3>
+            <span class="m-id">#100605</span>
+          </header>
+          <div class="m-stats">
+            <span class="stat" title="Vagues"><b>5</b> vagues</span>
+            <span class="stat" title="Ennemis au total"><b>7</b> ennemis</span>
+            <span class="stat energy" title="Énergie"><b>—</b> én.</span>
+          </div>
+          <div class="foes"><span class="foe">Thunder Ghost</span><span class="foe">Thunder King</span><span class="foe">Thunder God</span><span class="foe more">+4</span></div>
+        </article><article class="mission" data-s="light metal parade parade garden 100606 light king light ghost">
+          <header class="m-head">
+            <h3 class="m-name">Light Metal Parade</h3>
+            <span class="m-id">#100606</span>
+          </header>
+          <div class="m-stats">
+            <span class="stat" title="Vagues"><b>5</b> vagues</span>
+            <span class="stat" title="Ennemis au total"><b>10</b> ennemis</span>
+            <span class="stat energy" title="Énergie"><b>—</b> én.</span>
+          </div>
+          <div class="foes"><span class="foe">Light King</span><span class="foe">Light Ghost</span><span class="foe more">+8</span></div>
+        </article><article class="mission" data-s="dark metal parade parade garden 100607 metal ghost metal king">
+          <header class="m-head">
+            <h3 class="m-name">Dark Metal Parade</h3>
+            <span class="m-id">#100607</span>
+          </header>
+          <div class="m-stats">
+            <span class="stat" title="Vagues"><b>5</b> vagues</span>
+            <span class="stat" title="Ennemis au total"><b>12</b> ennemis</span>
+            <span class="stat energy" title="Énergie"><b>—</b> én.</span>
+          </div>
+          <div class="foes"><span class="foe">Metal Ghost</span><span class="foe">Metal King</span><span class="foe more">+10</span></div>
+        </article><article class="mission" data-s="fire metal parade parade garden 100608 fire god fire ghost fire king">
+          <header class="m-head">
+            <h3 class="m-name">Fire Metal Parade</h3>
+            <span class="m-id">#100608</span>
+          </header>
+          <div class="m-stats">
+            <span class="stat" title="Vagues"><b>5</b> vagues</span>
+            <span class="stat" title="Ennemis au total"><b>12</b> ennemis</span>
+            <span class="stat energy" title="Énergie"><b>—</b> én.</span>
+          </div>
+          <div class="foes"><span class="foe">Fire God</span><span class="foe">Fire Ghost</span><span class="foe">Fire King</span><span class="foe more">+9</span></div>
+        </article><article class="mission" data-s="water metal parade parade garden 100609 water king water ghost water god">
+          <header class="m-head">
+            <h3 class="m-name">Water Metal Parade</h3>
+            <span class="m-id">#100609</span>
+          </header>
+          <div class="m-stats">
+            <span class="stat" title="Vagues"><b>5</b> vagues</span>
+            <span class="stat" title="Ennemis au total"><b>11</b> ennemis</span>
+            <span class="stat energy" title="Énergie"><b>—</b> én.</span>
+          </div>
+          <div class="foes"><span class="foe">Water King</span><span class="foe">Water Ghost</span><span class="foe">Water God</span><span class="foe more">+8</span></div>
+        </article><article class="mission" data-s="earth metal parade parade garden 100610 earth ghost earth king">
+          <header class="m-head">
+            <h3 class="m-name">Earth Metal Parade</h3>
+            <span class="m-id">#100610</span>
+          </header>
+          <div class="m-stats">
+            <span class="stat" title="Vagues"><b>5</b> vagues</span>
+            <span class="stat" title="Ennemis au total"><b>13</b> ennemis</span>
+            <span class="stat energy" title="Énergie"><b>—</b> én.</span>
+          </div>
+          <div class="foes"><span class="foe">Earth Ghost</span><span class="foe">Earth King</span><span class="foe more">+11</span></div>
+        </article><article class="mission" data-s="thunder metal parade parade garden 100611 thunder ghost thunder king thunder god">
+          <header class="m-head">
+            <h3 class="m-name">Thunder Metal Parade</h3>
+            <span class="m-id">#100611</span>
+          </header>
+          <div class="m-stats">
+            <span class="stat" title="Vagues"><b>5</b> vagues</span>
+            <span class="stat" title="Ennemis au total"><b>7</b> ennemis</span>
+            <span class="stat energy" title="Énergie"><b>—</b> én.</span>
+          </div>
+          <div class="foes"><span class="foe">Thunder Ghost</span><span class="foe">Thunder King</span><span class="foe">Thunder God</span><span class="foe more">+4</span></div>
+        </article><article class="mission" data-s="light metal parade parade garden 100612 light king light ghost">
+          <header class="m-head">
+            <h3 class="m-name">Light Metal Parade</h3>
+            <span class="m-id">#100612</span>
+          </header>
+          <div class="m-stats">
+            <span class="stat" title="Vagues"><b>5</b> vagues</span>
+            <span class="stat" title="Ennemis au total"><b>10</b> ennemis</span>
+            <span class="stat energy" title="Énergie"><b>—</b> én.</span>
+          </div>
+          <div class="foes"><span class="foe">Light King</span><span class="foe">Light Ghost</span><span class="foe more">+8</span></div>
+        </article><article class="mission" data-s="dark metal parade parade garden 100613 metal ghost metal king">
+          <header class="m-head">
+            <h3 class="m-name">Dark Metal Parade</h3>
+            <span class="m-id">#100613</span>
+          </header>
+          <div class="m-stats">
+            <span class="stat" title="Vagues"><b>5</b> vagues</span>
+            <span class="stat" title="Ennemis au total"><b>12</b> ennemis</span>
+            <span class="stat energy" title="Énergie"><b>—</b> én.</span>
+          </div>
+          <div class="foes"><span class="foe">Metal Ghost</span><span class="foe">Metal King</span><span class="foe more">+10</span></div>
+        </article></div>
+    </section><section class="zone" data-zone="lone traveller of the wind">
+      <div class="z-head"><h2>Lone Traveller of the Wind</h2><span class="z-count">2</span></div>
+      <div class="grid"><article class="mission" data-s="the lone traveller lv. 3 lone traveller of the wind 100702 sylph archangel sky pirate grafl rantoul pirate verica trent bandit zaza squire atro">
+          <header class="m-head">
+            <h3 class="m-name">The Lone Traveller Lv. 3</h3>
+            <span class="m-id">#100702</span>
+          </header>
+          <div class="m-stats">
+            <span class="stat" title="Vagues"><b>7</b> vagues</span>
+            <span class="stat" title="Ennemis au total"><b>22</b> ennemis</span>
+            <span class="stat energy" title="Énergie"><b>30</b> én.</span>
+          </div>
+          <div class="foes"><span class="foe">Sylph</span><span class="foe">Archangel</span><span class="foe">Sky Pirate Grafl</span><span class="foe">Rantoul</span><span class="foe">Pirate Verica</span><span class="foe">Trent</span><span class="foe more">+16</span></div>
+        </article><article class="mission" data-s="the lone traveller lv. 4 lone traveller of the wind 100703 archangel sage mimir priestess maria salamander thief leon bahamut rantoul pirate verica">
+          <header class="m-head">
+            <h3 class="m-name">The Lone Traveller Lv. 4</h3>
+            <span class="m-id">#100703</span>
+          </header>
+          <div class="m-stats">
+            <span class="stat" title="Vagues"><b>7</b> vagues</span>
+            <span class="stat" title="Ennemis au total"><b>23</b> ennemis</span>
+            <span class="stat energy" title="Énergie"><b>40</b> én.</span>
+          </div>
+          <div class="foes"><span class="foe">Archangel</span><span class="foe">Sage Mimir</span><span class="foe">Priestess Maria</span><span class="foe">Salamander</span><span class="foe">Thief Leon</span><span class="foe">Bahamut</span><span class="foe more">+17</span></div>
+        </article></div>
+    </section><section class="zone" data-zone="dweller in the darkness">
+      <div class="z-head"><h2>Dweller in the Darkness</h2><span class="z-count">2</span></div>
+      <div class="grid"><article class="mission" data-s="dweller in the darkness lv. 3 dweller in the darkness 100802 rantoul skeleton king pirate verica trent bandit zaza memetes medusa zahhak">
+          <header class="m-head">
+            <h3 class="m-name">Dweller in the Darkness Lv. 3</h3>
+            <span class="m-id">#100802</span>
+          </header>
+          <div class="m-stats">
+            <span class="stat" title="Vagues"><b>7</b> vagues</span>
+            <span class="stat" title="Ennemis au total"><b>23</b> ennemis</span>
+            <span class="stat energy" title="Énergie"><b>30</b> én.</span>
+          </div>
+          <div class="foes"><span class="foe">Rantoul</span><span class="foe">Skeleton King</span><span class="foe">Pirate Verica</span><span class="foe">Trent</span><span class="foe">Bandit Zaza</span><span class="foe">Memetes</span><span class="foe more">+17</span></div>
+        </article><article class="mission" data-s="dweller in the darkness lv. 4 dweller in the darkness 100803 sylph skeleton king sky pirate grafl sage mimir priestess maria hell king hades rantoul pirate verica">
+          <header class="m-head">
+            <h3 class="m-name">Dweller in the Darkness Lv. 4</h3>
+            <span class="m-id">#100803</span>
+          </header>
+          <div class="m-stats">
+            <span class="stat" title="Vagues"><b>7</b> vagues</span>
+            <span class="stat" title="Ennemis au total"><b>23</b> ennemis</span>
+            <span class="stat energy" title="Énergie"><b>40</b> én.</span>
+          </div>
+          <div class="foes"><span class="foe">Sylph</span><span class="foe">Skeleton King</span><span class="foe">Sky Pirate Grafl</span><span class="foe">Sage Mimir</span><span class="foe">Priestess Maria</span><span class="foe">Hell King Hades</span><span class="foe more">+17</span></div>
+        </article></div>
+    </section><section class="zone" data-zone="bearer of the flaming god arm">
+      <div class="z-head"><h2>Bearer of the Flaming God Arm</h2><span class="z-count">2</span></div>
+      <div class="grid"><article class="mission" data-s="bearer of the god arm lv. 3 bearer of the flaming god arm 100902 sylph redcap sky pirate grafl rantoul pirate verica salamander thief leon phoenix">
+          <header class="m-head">
+            <h3 class="m-name">Bearer of the God Arm Lv. 3</h3>
+            <span class="m-id">#100902</span>
+          </header>
+          <div class="m-stats">
+            <span class="stat" title="Vagues"><b>7</b> vagues</span>
+            <span class="stat" title="Ennemis au total"><b>23</b> ennemis</span>
+            <span class="stat energy" title="Énergie"><b>30</b> én.</span>
+          </div>
+          <div class="foes"><span class="foe">Sylph</span><span class="foe">Redcap</span><span class="foe">Sky Pirate Grafl</span><span class="foe">Rantoul</span><span class="foe">Pirate Verica</span><span class="foe">Salamander</span><span class="foe more">+17</span></div>
+        </article><article class="mission" data-s="bearer of the god arm lv. 4 bearer of the flaming god arm 100903 sylph redcap sky pirate grafl sage mimir priestess maria lava phoenix trent bandit zaza">
+          <header class="m-head">
+            <h3 class="m-name">Bearer of the God Arm Lv. 4</h3>
+            <span class="m-id">#100903</span>
+          </header>
+          <div class="m-stats">
+            <span class="stat" title="Vagues"><b>7</b> vagues</span>
+            <span class="stat" title="Ennemis au total"><b>23</b> ennemis</span>
+            <span class="stat energy" title="Énergie"><b>40</b> én.</span>
+          </div>
+          <div class="foes"><span class="foe">Sylph</span><span class="foe">Redcap</span><span class="foe">Sky Pirate Grafl</span><span class="foe">Sage Mimir</span><span class="foe">Priestess Maria</span><span class="foe">Lava Phoenix</span><span class="foe more">+17</span></div>
+        </article></div>
+    </section><section class="zone" data-zone="flower in the frost">
+      <div class="z-head"><h2>Flower In the Frost</h2><span class="z-count">1</span></div>
+      <div class="grid"><article class="mission" data-s="flower in the frost lv. 3 flower in the frost 101002 rantoul sahuagin pirate verica sage mimir priestess maria trent head bandit zaza leviathan">
+          <header class="m-head">
+            <h3 class="m-name">Flower in the Frost Lv. 3</h3>
+            <span class="m-id">#101002</span>
+          </header>
+          <div class="m-stats">
+            <span class="stat" title="Vagues"><b>7</b> vagues</span>
+            <span class="stat" title="Ennemis au total"><b>23</b> ennemis</span>
+            <span class="stat energy" title="Énergie"><b>30</b> én.</span>
+          </div>
+          <div class="foes"><span class="foe">Rantoul</span><span class="foe">Sahuagin</span><span class="foe">Pirate Verica</span><span class="foe">Sage Mimir</span><span class="foe">Priestess Maria</span><span class="foe">Trent</span><span class="foe more">+17</span></div>
+        </article></div>
+    </section><section class="zone" data-zone="the iron-fisted lady">
+      <div class="z-head"><h2>The Iron-Fisted Lady</h2><span class="z-count">2</span></div>
+      <div class="grid"><article class="mission" data-s="the iron-fisted lady lv. 3 the iron-fisted lady 101102 salamander polevik thief leon trent bandit zaza great tree alneu rantoul pirate verica">
+          <header class="m-head">
+            <h3 class="m-name">The Iron-Fisted Lady Lv. 3</h3>
+            <span class="m-id">#101102</span>
+          </header>
+          <div class="m-stats">
+            <span class="stat" title="Vagues"><b>7</b> vagues</span>
+            <span class="stat" title="Ennemis au total"><b>23</b> ennemis</span>
+            <span class="stat energy" title="Énergie"><b>30</b> én.</span>
+          </div>
+          <div class="foes"><span class="foe">Salamander</span><span class="foe">Polevik</span><span class="foe">Thief Leon</span><span class="foe">Trent</span><span class="foe">Bandit Zaza</span><span class="foe">Great Tree Alneu</span><span class="foe more">+17</span></div>
+        </article><article class="mission" data-s="the iron-fisted lady lv. 4 the iron-fisted lady 101103 sylph polevik sky pirate grafl trent bandit zaza sage mimir priestess maria world tree altro">
+          <header class="m-head">
+            <h3 class="m-name">The Iron-Fisted Lady Lv. 4</h3>
+            <span class="m-id">#101103</span>
+          </header>
+          <div class="m-stats">
+            <span class="stat" title="Vagues"><b>7</b> vagues</span>
+            <span class="stat" title="Ennemis au total"><b>23</b> ennemis</span>
+            <span class="stat energy" title="Énergie"><b>40</b> én.</span>
+          </div>
+          <div class="foes"><span class="foe">Sylph</span><span class="foe">Polevik</span><span class="foe">Sky Pirate Grafl</span><span class="foe">Trent</span><span class="foe">Bandit Zaza</span><span class="foe">Sage Mimir</span><span class="foe more">+17</span></div>
+        </article></div>
+    </section><section class="zone" data-zone="when lightning strikes">
+      <div class="z-head"><h2>When Lightning Strikes</h2><span class="z-count">2</span></div>
+      <div class="grid"><article class="mission" data-s="when lightning strikes lv. 3 when lightning strikes 101202 aero sage mimir priestess maria salamander thief leon behemoth rantoul pirate verica">
+          <header class="m-head">
+            <h3 class="m-name">When Lightning Strikes Lv. 3</h3>
+            <span class="m-id">#101202</span>
+          </header>
+          <div class="m-stats">
+            <span class="stat" title="Vagues"><b>7</b> vagues</span>
+            <span class="stat" title="Ennemis au total"><b>23</b> ennemis</span>
+            <span class="stat energy" title="Énergie"><b>30</b> én.</span>
+          </div>
+          <div class="foes"><span class="foe">Aero</span><span class="foe">Sage Mimir</span><span class="foe">Priestess Maria</span><span class="foe">Salamander</span><span class="foe">Thief Leon</span><span class="foe">Behemoth</span><span class="foe more">+17</span></div>
+        </article><article class="mission" data-s="when lightning strikes lv. 4 when lightning strikes 101203 rantoul aero pirate verica king behemoth sylph sky pirate grafl sky boss grafl thunder punt zeln">
+          <header class="m-head">
+            <h3 class="m-name">When Lightning Strikes Lv. 4</h3>
+            <span class="m-id">#101203</span>
+          </header>
+          <div class="m-stats">
+            <span class="stat" title="Vagues"><b>7</b> vagues</span>
+            <span class="stat" title="Ennemis au total"><b>23</b> ennemis</span>
+            <span class="stat energy" title="Énergie"><b>40</b> én.</span>
+          </div>
+          <div class="foes"><span class="foe">Rantoul</span><span class="foe">Aero</span><span class="foe">Pirate Verica</span><span class="foe">King Behemoth</span><span class="foe">Sylph</span><span class="foe">Sky Pirate Grafl</span><span class="foe more">+17</span></div>
+        </article></div>
+    </section><section class="zone" data-zone="affectionate flames">
+      <div class="z-head"><h2>Affectionate Flames</h2><span class="z-count">2</span></div>
+      <div class="grid"><article class="mission" data-s="affectionate flames lv. 3 affectionate flames 101700 thief leon salamander witch liza firedrake cerberus freya">
+          <header class="m-head">
+            <h3 class="m-name">Affectionate Flames Lv. 3</h3>
+            <span class="m-id">#101700</span>
+          </header>
+          <div class="m-stats">
+            <span class="stat" title="Vagues"><b>5</b> vagues</span>
+            <span class="stat" title="Ennemis au total"><b>9</b> ennemis</span>
+            <span class="stat energy" title="Énergie"><b>25</b> én.</span>
+          </div>
+          <div class="foes"><span class="foe">Thief Leon</span><span class="foe">Salamander</span><span class="foe">Witch Liza</span><span class="foe">Firedrake</span><span class="foe">Cerberus</span><span class="foe">Freya</span><span class="foe more">+3</span></div>
+        </article><article class="mission" data-s="affectionate flames lv. 4 affectionate flames 101701 orthos salamander thief leon orc witch liza dragon graven blaze sibyl freya">
+          <header class="m-head">
+            <h3 class="m-name">Affectionate Flames Lv. 4</h3>
+            <span class="m-id">#101701</span>
+          </header>
+          <div class="m-stats">
+            <span class="stat" title="Vagues"><b>5</b> vagues</span>
+            <span class="stat" title="Ennemis au total"><b>16</b> ennemis</span>
+            <span class="stat energy" title="Énergie"><b>30</b> én.</span>
+          </div>
+          <div class="foes"><span class="foe">Orthos</span><span class="foe">Salamander</span><span class="foe">Thief Leon</span><span class="foe">Orc</span><span class="foe">Witch Liza</span><span class="foe">Dragon Graven</span><span class="foe more">+10</span></div>
+        </article></div>
+    </section><section class="zone" data-zone="absolute zero">
+      <div class="z-head"><h2>Absolute Zero</h2><span class="z-count">1</span></div>
+      <div class="grid"><article class="mission" data-s="absolute zero lv. 4 absolute zero 101801 priest merith pirate verica ramia wendigo burst frog water god snow sibyl eliza">
+          <header class="m-head">
+            <h3 class="m-name">Absolute Zero Lv. 4</h3>
+            <span class="m-id">#101801</span>
+          </header>
+          <div class="m-stats">
+            <span class="stat" title="Vagues"><b>5</b> vagues</span>
+            <span class="stat" title="Ennemis au total"><b>11</b> ennemis</span>
+            <span class="stat energy" title="Énergie"><b>30</b> én.</span>
+          </div>
+          <div class="foes"><span class="foe">Priest Merith</span><span class="foe">Pirate Verica</span><span class="foe">Ramia</span><span class="foe">Wendigo</span><span class="foe">Burst Frog</span><span class="foe">Water God</span><span class="foe more">+5</span></div>
+        </article></div>
+    </section><section class="zone" data-zone="protected by the sky">
+      <div class="z-head"><h2>Protected by the Sky</h2><span class="z-count">1</span></div>
+      <div class="grid"><article class="mission" data-s="protected by the sky lv. 4 protected by the sky 102101 archangel al-mi&#x27;raj priestess maria unicorn sage mimir sky hero athena ray sibyl sola">
+          <header class="m-head">
+            <h3 class="m-name">Protected by the Sky Lv. 4</h3>
+            <span class="m-id">#102101</span>
+          </header>
+          <div class="m-stats">
+            <span class="stat" title="Vagues"><b>5</b> vagues</span>
+            <span class="stat" title="Ennemis au total"><b>13</b> ennemis</span>
+            <span class="stat energy" title="Énergie"><b>30</b> én.</span>
+          </div>
+          <div class="foes"><span class="foe">Archangel</span><span class="foe">Al-mi&#x27;raj</span><span class="foe">Priestess Maria</span><span class="foe">Unicorn</span><span class="foe">Sage Mimir</span><span class="foe">Sky Hero Athena</span><span class="foe more">+7</span></div>
+        </article></div>
+    </section><section class="zone" data-zone="enthralled by the moon">
+      <div class="z-head"><h2>Enthralled by the Moon</h2><span class="z-count">1</span></div>
+      <div class="grid"><article class="mission" data-s="enthralled by the moon lv. 4 enthralled by the moon 102201 sorceress lily medusa imp skeleton king lich incubus night sibyl madia">
+          <header class="m-head">
+            <h3 class="m-name">Enthralled by the Moon Lv. 4</h3>
+            <span class="m-id">#102201</span>
+          </header>
+          <div class="m-stats">
+            <span class="stat" title="Vagues"><b>5</b> vagues</span>
+            <span class="stat" title="Ennemis au total"><b>10</b> ennemis</span>
+            <span class="stat energy" title="Énergie"><b>30</b> én.</span>
+          </div>
+          <div class="foes"><span class="foe">Sorceress Lily</span><span class="foe">Medusa</span><span class="foe">Imp</span><span class="foe">Skeleton King</span><span class="foe">Lich</span><span class="foe">Incubus</span><span class="foe more">+4</span></div>
+        </article></div>
+    </section><section class="zone" data-zone="songstress of light">
+      <div class="z-head"><h2>Songstress of Light</h2><span class="z-count">3</span></div>
+      <div class="grid"><article class="mission" data-s="shining stage lv. 1 songstress of light 103600 angel sage mimir unicorn goblin harpy bandit zaza thief leon skeleton">
+          <header class="m-head">
+            <h3 class="m-name">Shining Stage Lv. 1</h3>
+            <span class="m-id">#103600</span>
+          </header>
+          <div class="m-stats">
+            <span class="stat" title="Vagues"><b>7</b> vagues</span>
+            <span class="stat" title="Ennemis au total"><b>25</b> ennemis</span>
+            <span class="stat energy" title="Énergie"><b>10</b> én.</span>
+          </div>
+          <div class="foes"><span class="foe">Angel</span><span class="foe">Sage Mimir</span><span class="foe">Unicorn</span><span class="foe">Goblin</span><span class="foe">Harpy</span><span class="foe">Bandit Zaza</span><span class="foe more">+19</span></div>
+        </article><article class="mission" data-s="shining stage lv. 2 songstress of light 103601 skeleton angel medusa lilin mandragora bandit zaza trent light lord mimir">
+          <header class="m-head">
+            <h3 class="m-name">Shining Stage Lv. 2</h3>
+            <span class="m-id">#103601</span>
+          </header>
+          <div class="m-stats">
+            <span class="stat" title="Vagues"><b>7</b> vagues</span>
+            <span class="stat" title="Ennemis au total"><b>23</b> ennemis</span>
+            <span class="stat energy" title="Énergie"><b>20</b> én.</span>
+          </div>
+          <div class="foes"><span class="foe">Skeleton</span><span class="foe">Angel</span><span class="foe">Medusa</span><span class="foe">Lilin</span><span class="foe">Mandragora</span><span class="foe">Bandit Zaza</span><span class="foe more">+17</span></div>
+        </article><article class="mission" data-s="shining stage lv. 3 songstress of light 103602 sylph archangel sky pirate grafl rantoul pirate verica wyvern unicorn pegasus">
+          <header class="m-head">
+            <h3 class="m-name">Shining Stage Lv. 3</h3>
+            <span class="m-id">#103602</span>
+          </header>
+          <div class="m-stats">
+            <span class="stat" title="Vagues"><b>7</b> vagues</span>
+            <span class="stat" title="Ennemis au total"><b>23</b> ennemis</span>
+            <span class="stat energy" title="Énergie"><b>30</b> én.</span>
+          </div>
+          <div class="foes"><span class="foe">Sylph</span><span class="foe">Archangel</span><span class="foe">Sky Pirate Grafl</span><span class="foe">Rantoul</span><span class="foe">Pirate Verica</span><span class="foe">Wyvern</span><span class="foe more">+17</span></div>
+        </article></div>
+    </section><section class="zone" data-zone="grand gaia chronicles">
+      <div class="z-head"><h2>Grand Gaia Chronicles</h2><span class="z-count">9</span></div>
+      <div class="grid"><article class="mission" data-s="young flames grand gaia chronicles 150000 fencer vargas burning vargas fire knight lava">
+          <header class="m-head">
+            <h3 class="m-name">Young Flames</h3>
+            <span class="m-id">#150000</span>
+          </header>
+          <div class="m-stats">
+            <span class="stat" title="Vagues"><b>2</b> vagues</span>
+            <span class="stat" title="Ennemis au total"><b>3</b> ennemis</span>
+            <span class="stat energy" title="Énergie"><b>20</b> én.</span>
+          </div>
+          <div class="foes"><span class="foe">Fencer Vargas</span><span class="foe">Burning Vargas</span><span class="foe">Fire Knight Lava</span></div>
+        </article><article class="mission" data-s="trial by fire grand gaia chronicles 150001 ice ruler sergio sky king falma sky boss grafl dragon graven bahamut loch ness god blade mifune">
+          <header class="m-head">
+            <h3 class="m-name">Trial by Fire</h3>
+            <span class="m-id">#150001</span>
+          </header>
+          <div class="m-stats">
+            <span class="stat" title="Vagues"><b>4</b> vagues</span>
+            <span class="stat" title="Ennemis au total"><b>7</b> ennemis</span>
+            <span class="stat energy" title="Énergie"><b>30</b> én.</span>
+          </div>
+          <div class="foes"><span class="foe">Ice Ruler Sergio</span><span class="foe">Sky King Falma</span><span class="foe">Sky Boss Grafl</span><span class="foe">Dragon Graven</span><span class="foe">Bahamut</span><span class="foe">Loch Ness</span><span class="foe more">+1</span></div>
+        </article><article class="mission" data-s="supreme god of fire grand gaia chronicles 150002 fire god vargas head chef lancia great thief leon god arm galant fire god lava magma knight agni beast king zegar holy flame vargas">
+          <header class="m-head">
+            <h3 class="m-name">Supreme God of Fire</h3>
+            <span class="m-id">#150002</span>
+          </header>
+          <div class="m-stats">
+            <span class="stat" title="Vagues"><b>3</b> vagues</span>
+            <span class="stat" title="Ennemis au total"><b>8</b> ennemis</span>
+            <span class="stat energy" title="Énergie"><b>50</b> én.</span>
+          </div>
+          <div class="foes"><span class="foe">Fire God Vargas</span><span class="foe">Head Chef Lancia</span><span class="foe">Great Thief Leon</span><span class="foe">God Arm Galant</span><span class="foe">Fire God Lava</span><span class="foe">Magma Knight Agni</span><span class="foe more">+2</span></div>
+        </article><article class="mission" data-s="the demon pike&#x27;s seed grand gaia chronicles 150020 pikeman lance sky boss grafl sky king falma dragoon zephu white lebra">
+          <header class="m-head">
+            <h3 class="m-name">The Demon Pike&#x27;s Seed</h3>
+            <span class="m-id">#150020</span>
+          </header>
+          <div class="m-stats">
+            <span class="stat" title="Vagues"><b>4</b> vagues</span>
+            <span class="stat" title="Ennemis au total"><b>5</b> ennemis</span>
+            <span class="stat energy" title="Énergie"><b>20</b> én.</span>
+          </div>
+          <div class="foes"><span class="foe">Pikeman Lance</span><span class="foe">Sky Boss Grafl</span><span class="foe">Sky King Falma</span><span class="foe">Dragoon Zephu</span><span class="foe">White Lebra</span></div>
+        </article><article class="mission" data-s="revival of the world tree grand gaia chronicles 150021 eerie mandragora  wicked mandragora raging mandragora high elf pixy leore titania xipe totec world tree altro">
+          <header class="m-head">
+            <h3 class="m-name">Revival of the World Tree</h3>
+            <span class="m-id">#150021</span>
+          </header>
+          <div class="m-stats">
+            <span class="stat" title="Vagues"><b>3</b> vagues</span>
+            <span class="stat" title="Ennemis au total"><b>11</b> ennemis</span>
+            <span class="stat energy" title="Énergie"><b>30</b> én.</span>
+          </div>
+          <div class="foes"><span class="foe">Eerie Mandragora </span><span class="foe">Wicked Mandragora</span><span class="foe">Raging Mandragora</span><span class="foe">High Elf</span><span class="foe">Pixy Leore</span><span class="foe">Titania</span><span class="foe more">+5</span></div>
+        </article><article class="mission" data-s="the forest&#x27;s sublimation grand gaia chronicles 150022 bow god lario empress lidith gun god douglas wild bandit zaza nature god lance god tree eltri holy earth lance">
+          <header class="m-head">
+            <h3 class="m-name">The Forest&#x27;s Sublimation</h3>
+            <span class="m-id">#150022</span>
+          </header>
+          <div class="m-stats">
+            <span class="stat" title="Vagues"><b>3</b> vagues</span>
+            <span class="stat" title="Ennemis au total"><b>7</b> ennemis</span>
+            <span class="stat energy" title="Énergie"><b>50</b> én.</span>
+          </div>
+          <div class="foes"><span class="foe">Bow God Lario</span><span class="foe">Empress Lidith</span><span class="foe">Gun God Douglas</span><span class="foe">Wild Bandit Zaza</span><span class="foe">Nature God Lance</span><span class="foe">God Tree Eltri</span><span class="foe more">+1</span></div>
+        </article><article class="mission" data-s="the lone bounty hunter grand gaia chronicles 150030 warrior eze thunderbird rage beast zegar cerberus thunder eze emilia">
+          <header class="m-head">
+            <h3 class="m-name">The Lone Bounty Hunter</h3>
+            <span class="m-id">#150030</span>
+          </header>
+          <div class="m-stats">
+            <span class="stat" title="Vagues"><b>4</b> vagues</span>
+            <span class="stat" title="Ennemis au total"><b>8</b> ennemis</span>
+            <span class="stat energy" title="Énergie"><b>20</b> én.</span>
+          </div>
+          <div class="foes"><span class="foe">Warrior Eze</span><span class="foe">Thunderbird</span><span class="foe">Rage Beast Zegar</span><span class="foe">Cerberus</span><span class="foe">Thunder Eze</span><span class="foe">Emilia</span><span class="foe more">+2</span></div>
+        </article><article class="mission" data-s="in shining shadows grand gaia chronicles 150031 adventurer alma elimo mountaineer talos scar blade zelban brawler nemia spark kick zeln pugilist dilma king behemoth">
+          <header class="m-head">
+            <h3 class="m-name">In Shining Shadows</h3>
+            <span class="m-id">#150031</span>
+          </header>
+          <div class="m-stats">
+            <span class="stat" title="Vagues"><b>3</b> vagues</span>
+            <span class="stat" title="Ennemis au total"><b>8</b> ennemis</span>
+            <span class="stat energy" title="Énergie"><b>30</b> én.</span>
+          </div>
+          <div class="foes"><span class="foe">Adventurer Alma</span><span class="foe">Elimo</span><span class="foe">Mountaineer Talos</span><span class="foe">Scar Blade Zelban</span><span class="foe">Brawler Nemia</span><span class="foe">Spark Kick Zeln</span><span class="foe more">+2</span></div>
+        </article><article class="mission" data-s="the unrivalled fool grand gaia chronicles 150032 sky legend falma sky emperor grafl general weiss royal dancer may thunder god eze goddess emilia holy thunder eze">
+          <header class="m-head">
+            <h3 class="m-name">The Unrivalled Fool</h3>
+            <span class="m-id">#150032</span>
+          </header>
+          <div class="m-stats">
+            <span class="stat" title="Vagues"><b>3</b> vagues</span>
+            <span class="stat" title="Ennemis au total"><b>7</b> ennemis</span>
+            <span class="stat energy" title="Énergie"><b>50</b> én.</span>
+          </div>
+          <div class="foes"><span class="foe">Sky Legend Falma</span><span class="foe">Sky Emperor Grafl</span><span class="foe">General Weiss</span><span class="foe">Royal Dancer May</span><span class="foe">Thunder God Eze</span><span class="foe">Goddess Emilia</span><span class="foe more">+1</span></div>
+        </article></div>
+    </section><section class="zone" data-zone="great tree&#x27;s melody">
+      <div class="z-head"><h2>Great Tree&#x27;s Melody</h2><span class="z-count">2</span></div>
+      <div class="grid"><article class="mission" data-s="out the window lv. 2 great tree&#x27;s melody 900000 rantoul lilin fairy medusa merman sylph hell king hades wyvern">
+          <header class="m-head">
+            <h3 class="m-name">Out the Window Lv. 2</h3>
+            <span class="m-id">#900000</span>
+          </header>
+          <div class="m-stats">
+            <span class="stat" title="Vagues"><b>7</b> vagues</span>
+            <span class="stat" title="Ennemis au total"><b>18</b> ennemis</span>
+            <span class="stat energy" title="Énergie"><b>20</b> én.</span>
+          </div>
+          <div class="foes"><span class="foe">Rantoul</span><span class="foe">Lilin</span><span class="foe">Fairy</span><span class="foe">Medusa</span><span class="foe">Merman</span><span class="foe">Sylph</span><span class="foe more">+12</span></div>
+        </article><article class="mission" data-s="out the window lv. 3 great tree&#x27;s melody 900001 fairy sylph sorceress lily rantoul priestess maria trent sage mimir hell king hades">
+          <header class="m-head">
+            <h3 class="m-name">Out the Window Lv. 3</h3>
+            <span class="m-id">#900001</span>
+          </header>
+          <div class="m-stats">
+            <span class="stat" title="Vagues"><b>7</b> vagues</span>
+            <span class="stat" title="Ennemis au total"><b>20</b> ennemis</span>
+            <span class="stat energy" title="Énergie"><b>30</b> én.</span>
+          </div>
+          <div class="foes"><span class="foe">Fairy</span><span class="foe">Sylph</span><span class="foe">Sorceress Lily</span><span class="foe">Rantoul</span><span class="foe">Priestess Maria</span><span class="foe">Trent</span><span class="foe more">+14</span></div>
+        </article></div>
+    </section><section class="zone" data-zone="frontier hunter">
+      <div class="z-head"><h2>Frontier Hunter</h2><span class="z-count">2</span></div>
+      <div class="grid"><article class="mission" data-s="uncharted frontier - middle 6 frontier hunter 1000061 witch liza priest merith geomancer claris dancer may sage mimir sorceress lily mifune luna">
+          <header class="m-head">
+            <h3 class="m-name">Uncharted Frontier - Middle 6</h3>
+            <span class="m-id">#1000061</span>
+          </header>
+          <div class="m-stats">
+            <span class="stat" title="Vagues"><b>5</b> vagues</span>
+            <span class="stat" title="Ennemis au total"><b>21</b> ennemis</span>
+            <span class="stat energy" title="Énergie"><b>—</b> én.</span>
+          </div>
+          <div class="foes"><span class="foe">Witch Liza</span><span class="foe">Priest Merith</span><span class="foe">Geomancer Claris</span><span class="foe">Dancer May</span><span class="foe">Sage Mimir</span><span class="foe">Sorceress Lily</span><span class="foe more">+15</span></div>
+        </article><article class="mission" data-s="uncharted frontier - end 6 frontier hunter 1000062 fire spirit water spirit earth spirit thunder spirit light spirit dark spirit nyx zazabis">
+          <header class="m-head">
+            <h3 class="m-name">Uncharted Frontier - End 6</h3>
+            <span class="m-id">#1000062</span>
+          </header>
+          <div class="m-stats">
+            <span class="stat" title="Vagues"><b>5</b> vagues</span>
+            <span class="stat" title="Ennemis au total"><b>15</b> ennemis</span>
+            <span class="stat energy" title="Énergie"><b>—</b> én.</span>
+          </div>
+          <div class="foes"><span class="foe">Fire Spirit</span><span class="foe">Water Spirit</span><span class="foe">Earth Spirit</span><span class="foe">Thunder Spirit</span><span class="foe">Light Spirit</span><span class="foe">Dark Spirit</span><span class="foe more">+9</span></div>
+        </article></div>
+    </section><section class="zone" data-zone="trial test">
+      <div class="z-head"><h2>Trial Test</h2><span class="z-count">2</span></div>
+      <div class="grid"><article class="mission" data-s="trial no. 001 trial test 2000000 brave knight karl">
+          <header class="m-head">
+            <h3 class="m-name">Trial No. 001</h3>
+            <span class="m-id">#2000000</span>
+          </header>
+          <div class="m-stats">
+            <span class="stat" title="Vagues"><b>1</b> vagues</span>
+            <span class="stat" title="Ennemis au total"><b>1</b> ennemis</span>
+            <span class="stat energy" title="Énergie"><b>50</b> én.</span>
+          </div>
+          <div class="foes"><span class="foe">Brave Knight Karl</span></div>
+        </article><article class="mission" data-s="trial no. 002 trial test 2000001 grahdens">
+          <header class="m-head">
+            <h3 class="m-name">Trial No. 002</h3>
+            <span class="m-id">#2000001</span>
+          </header>
+          <div class="m-stats">
+            <span class="stat" title="Vagues"><b>1</b> vagues</span>
+            <span class="stat" title="Ennemis au total"><b>1</b> ennemis</span>
+            <span class="stat energy" title="Énergie"><b>50</b> én.</span>
+          </div>
+          <div class="foes"><span class="foe">Grahdens</span></div>
+        </article></div>
+    </section><section class="zone" data-zone="unholy tower">
+      <div class="z-head"><h2>Unholy Tower</h2><span class="z-count">10</span></div>
+      <div class="grid"><article class="mission" data-s="unholy tower floor 1-10 unholy tower 8301001 goblin sky pirate grafl pirate verica bandit zaza thief leon xenon lv1 orthos">
+          <header class="m-head">
+            <h3 class="m-name">Unholy Tower Floor 1-10</h3>
+            <span class="m-id">#8301001</span>
+          </header>
+          <div class="m-stats">
+            <span class="stat" title="Vagues"><b>10</b> vagues</span>
+            <span class="stat" title="Ennemis au total"><b>36</b> ennemis</span>
+            <span class="stat energy" title="Énergie"><b>15</b> én.</span>
+          </div>
+          <div class="foes"><span class="foe">Goblin</span><span class="foe">Sky Pirate Grafl</span><span class="foe">Pirate Verica</span><span class="foe">Bandit Zaza</span><span class="foe">Thief Leon</span><span class="foe">Xenon Lv1</span><span class="foe more">+30</span></div>
+        </article><article class="mission" data-s="unholy tower floor 11-20 unholy tower 8302001 goblin priest merith geomancer claris sorceress lily medusa fire god xenon lv2 sky pirate grafl">
+          <header class="m-head">
+            <h3 class="m-name">Unholy Tower Floor 11-20</h3>
+            <span class="m-id">#8302001</span>
+          </header>
+          <div class="m-stats">
+            <span class="stat" title="Vagues"><b>10</b> vagues</span>
+            <span class="stat" title="Ennemis au total"><b>33</b> ennemis</span>
+            <span class="stat energy" title="Énergie"><b>15</b> én.</span>
+          </div>
+          <div class="foes"><span class="foe">Goblin</span><span class="foe">Priest Merith</span><span class="foe">Geomancer Claris</span><span class="foe">Sorceress Lily</span><span class="foe">Medusa</span><span class="foe">Fire God</span><span class="foe more">+27</span></div>
+        </article><article class="mission" data-s="unholy tower floor 21-30 unholy tower 8303001 merman earth idol dark idol priest merith geomancer claris healer merith djin thunder pot">
+          <header class="m-head">
+            <h3 class="m-name">Unholy Tower Floor 21-30</h3>
+            <span class="m-id">#8303001</span>
+          </header>
+          <div class="m-stats">
+            <span class="stat" title="Vagues"><b>10</b> vagues</span>
+            <span class="stat" title="Ennemis au total"><b>33</b> ennemis</span>
+            <span class="stat energy" title="Énergie"><b>15</b> én.</span>
+          </div>
+          <div class="foes"><span class="foe">Merman</span><span class="foe">Earth Idol</span><span class="foe">Dark Idol</span><span class="foe">Priest Merith</span><span class="foe">Geomancer Claris</span><span class="foe">Healer Merith</span><span class="foe more">+27</span></div>
+        </article><article class="mission" data-s="unholy tower floor 31-40 unholy tower 8304001 merman unicorn priestess maria thunder god xenon lv4 ifrit fire pot medusa">
+          <header class="m-head">
+            <h3 class="m-name">Unholy Tower Floor 31-40</h3>
+            <span class="m-id">#8304001</span>
+          </header>
+          <div class="m-stats">
+            <span class="stat" title="Vagues"><b>10</b> vagues</span>
+            <span class="stat" title="Ennemis au total"><b>29</b> ennemis</span>
+            <span class="stat energy" title="Énergie"><b>20</b> én.</span>
+          </div>
+          <div class="foes"><span class="foe">Merman</span><span class="foe">Unicorn</span><span class="foe">Priestess Maria</span><span class="foe">Thunder God</span><span class="foe">Xenon Lv4</span><span class="foe">Ifrit</span><span class="foe more">+23</span></div>
+        </article><article class="mission" data-s="unholy tower floor 41-50 unholy tower 8305001 merman mandragora pirate verica rantoul harpy sky pirate grafl sylph medusa">
+          <header class="m-head">
+            <h3 class="m-name">Unholy Tower Floor 41-50</h3>
+            <span class="m-id">#8305001</span>
+          </header>
+          <div class="m-stats">
+            <span class="stat" title="Vagues"><b>10</b> vagues</span>
+            <span class="stat" title="Ennemis au total"><b>36</b> ennemis</span>
+            <span class="stat energy" title="Énergie"><b>20</b> én.</span>
+          </div>
+          <div class="foes"><span class="foe">Merman</span><span class="foe">Mandragora</span><span class="foe">Pirate Verica</span><span class="foe">Rantoul</span><span class="foe">Harpy</span><span class="foe">Sky Pirate Grafl</span><span class="foe more">+30</span></div>
+        </article><article class="mission" data-s="unholy tower floor 51-60 unholy tower 8306001 mandragora rantoul plunderer verica earth god goblin thief leon salamander priestess maria">
+          <header class="m-head">
+            <h3 class="m-name">Unholy Tower Floor 51-60</h3>
+            <span class="m-id">#8306001</span>
+          </header>
+          <div class="m-stats">
+            <span class="stat" title="Vagues"><b>10</b> vagues</span>
+            <span class="stat" title="Ennemis au total"><b>35</b> ennemis</span>
+            <span class="stat energy" title="Énergie"><b>20</b> én.</span>
+          </div>
+          <div class="foes"><span class="foe">Mandragora</span><span class="foe">Rantoul</span><span class="foe">Plunderer Verica</span><span class="foe">Earth God</span><span class="foe">Goblin</span><span class="foe">Thief Leon</span><span class="foe more">+29</span></div>
+        </article><article class="mission" data-s="unholy tower floor 61-70 unholy tower 8307001 harpy unicorn priestess maria pegasus rantoul plunderer verica goblin thief leon">
+          <header class="m-head">
+            <h3 class="m-name">Unholy Tower Floor 61-70</h3>
+            <span class="m-id">#8307001</span>
+          </header>
+          <div class="m-stats">
+            <span class="stat" title="Vagues"><b>10</b> vagues</span>
+            <span class="stat" title="Ennemis au total"><b>33</b> ennemis</span>
+            <span class="stat energy" title="Énergie"><b>20</b> én.</span>
+          </div>
+          <div class="foes"><span class="foe">Harpy</span><span class="foe">Unicorn</span><span class="foe">Priestess Maria</span><span class="foe">Pegasus</span><span class="foe">Rantoul</span><span class="foe">Plunderer Verica</span><span class="foe more">+27</span></div>
+        </article><article class="mission" data-s="unholy tower floor 71-80 unholy tower 8308001 trent aero bandit zaza rantoul pirate verica salamander head thief leon thief leon">
+          <header class="m-head">
+            <h3 class="m-name">Unholy Tower Floor 71-80</h3>
+            <span class="m-id">#8308001</span>
+          </header>
+          <div class="m-stats">
+            <span class="stat" title="Vagues"><b>10</b> vagues</span>
+            <span class="stat" title="Ennemis au total"><b>39</b> ennemis</span>
+            <span class="stat energy" title="Énergie"><b>25</b> én.</span>
+          </div>
+          <div class="foes"><span class="foe">Trent</span><span class="foe">Aero</span><span class="foe">Bandit Zaza</span><span class="foe">Rantoul</span><span class="foe">Pirate Verica</span><span class="foe">Salamander</span><span class="foe more">+33</span></div>
+        </article><article class="mission" data-s="unholy tower floor 81-90 unholy tower 8309001 rantoul archangel pirate verica sylph sky pirate grafl sir sancus xenon lv9 salamander thief leon">
+          <header class="m-head">
+            <h3 class="m-name">Unholy Tower Floor 81-90</h3>
+            <span class="m-id">#8309001</span>
+          </header>
+          <div class="m-stats">
+            <span class="stat" title="Vagues"><b>10</b> vagues</span>
+            <span class="stat" title="Ennemis au total"><b>32</b> ennemis</span>
+            <span class="stat energy" title="Énergie"><b>25</b> én.</span>
+          </div>
+          <div class="foes"><span class="foe">Rantoul</span><span class="foe">Archangel</span><span class="foe">Pirate Verica</span><span class="foe">Sylph</span><span class="foe">Sky Pirate Grafl</span><span class="foe">Sir Sancus Xenon Lv9</span><span class="foe more">+26</span></div>
+        </article><article class="mission" data-s="unholy tower floor 91-100 unholy tower 8310001 skeleton king priestess maria pegasus trent bandit zaza salamander head thief leon thief leon">
+          <header class="m-head">
+            <h3 class="m-name">Unholy Tower Floor 91-100</h3>
+            <span class="m-id">#8310001</span>
+          </header>
+          <div class="m-stats">
+            <span class="stat" title="Vagues"><b>10</b> vagues</span>
+            <span class="stat" title="Ennemis au total"><b>34</b> ennemis</span>
+            <span class="stat energy" title="Énergie"><b>25</b> én.</span>
+          </div>
+          <div class="foes"><span class="foe">Skeleton King</span><span class="foe">Priestess Maria</span><span class="foe">Pegasus</span><span class="foe">Trent</span><span class="foe">Bandit Zaza</span><span class="foe">Salamander</span><span class="foe more">+28</span></div>
+        </article></div>
+    </section><section class="zone" data-zone="unholy tower - dark side -">
+      <div class="z-head"><h2>Unholy Tower - Dark Side -</h2><span class="z-count">10</span></div>
+      <div class="grid"><article class="mission" data-s="unholy tower floor 101-110 unholy tower - dark side - 8311001 harpy goblin sky pirate grafl sylph cursed water god thunder king unicorn priestess maria">
+          <header class="m-head">
+            <h3 class="m-name">Unholy Tower Floor 101-110</h3>
+            <span class="m-id">#8311001</span>
+          </header>
+          <div class="m-stats">
+            <span class="stat" title="Vagues"><b>10</b> vagues</span>
+            <span class="stat" title="Ennemis au total"><b>35</b> ennemis</span>
+            <span class="stat energy" title="Énergie"><b>20</b> én.</span>
+          </div>
+          <div class="foes"><span class="foe">Harpy</span><span class="foe">Goblin</span><span class="foe">Sky Pirate Grafl</span><span class="foe">Sylph</span><span class="foe">Cursed Water God</span><span class="foe">Thunder King</span><span class="foe more">+29</span></div>
+        </article><article class="mission" data-s="unholy tower floor 111-120 unholy tower - dark side - 8312001 harpy goblin sky pirate grafl sylph medusa lilin merman pirate verica">
+          <header class="m-head">
+            <h3 class="m-name">Unholy Tower Floor 111-120</h3>
+            <span class="m-id">#8312001</span>
+          </header>
+          <div class="m-stats">
+            <span class="stat" title="Vagues"><b>10</b> vagues</span>
+            <span class="stat" title="Ennemis au total"><b>36</b> ennemis</span>
+            <span class="stat energy" title="Énergie"><b>20</b> én.</span>
+          </div>
+          <div class="foes"><span class="foe">Harpy</span><span class="foe">Goblin</span><span class="foe">Sky Pirate Grafl</span><span class="foe">Sylph</span><span class="foe">Medusa</span><span class="foe">Lilin</span><span class="foe more">+30</span></div>
+        </article><article class="mission" data-s="unholy tower floor 121-130 unholy tower - dark side - 8313001 harpy merman sky pirate grafl sylph pirate verica rantoul salamander head thief leon">
+          <header class="m-head">
+            <h3 class="m-name">Unholy Tower Floor 121-130</h3>
+            <span class="m-id">#8313001</span>
+          </header>
+          <div class="m-stats">
+            <span class="stat" title="Vagues"><b>10</b> vagues</span>
+            <span class="stat" title="Ennemis au total"><b>37</b> ennemis</span>
+            <span class="stat energy" title="Énergie"><b>20</b> én.</span>
+          </div>
+          <div class="foes"><span class="foe">Harpy</span><span class="foe">Merman</span><span class="foe">Sky Pirate Grafl</span><span class="foe">Sylph</span><span class="foe">Pirate Verica</span><span class="foe">Rantoul</span><span class="foe more">+31</span></div>
+        </article><article class="mission" data-s="unholy tower floor 131-140 unholy tower - dark side - 8314001 sahuagin trent head bandit zaza bandit zaza rantoul plunderer verica salamander head thief leon">
+          <header class="m-head">
+            <h3 class="m-name">Unholy Tower Floor 131-140</h3>
+            <span class="m-id">#8314001</span>
+          </header>
+          <div class="m-stats">
+            <span class="stat" title="Vagues"><b>10</b> vagues</span>
+            <span class="stat" title="Ennemis au total"><b>36</b> ennemis</span>
+            <span class="stat energy" title="Énergie"><b>25</b> én.</span>
+          </div>
+          <div class="foes"><span class="foe">Sahuagin</span><span class="foe">Trent</span><span class="foe">Head Bandit Zaza</span><span class="foe">Bandit Zaza</span><span class="foe">Rantoul</span><span class="foe">Plunderer Verica</span><span class="foe more">+30</span></div>
+        </article><article class="mission" data-s="unholy tower floor 141-150 unholy tower - dark side - 8315001 polevik lilin zahhak trent bandit zaza fire pot light pot salamander">
+          <header class="m-head">
+            <h3 class="m-name">Unholy Tower Floor 141-150</h3>
+            <span class="m-id">#8315001</span>
+          </header>
+          <div class="m-stats">
+            <span class="stat" title="Vagues"><b>10</b> vagues</span>
+            <span class="stat" title="Ennemis au total"><b>31</b> ennemis</span>
+            <span class="stat energy" title="Énergie"><b>25</b> én.</span>
+          </div>
+          <div class="foes"><span class="foe">Polevik</span><span class="foe">Lilin</span><span class="foe">Zahhak</span><span class="foe">Trent</span><span class="foe">Bandit Zaza</span><span class="foe">Fire Pot</span><span class="foe more">+25</span></div>
+        </article><article class="mission" data-s="unholy tower floor 151-160 unholy tower - dark side - 8316001 rantoul polevik pirate verica salamander thief leon sage mimir priestess maria cursed estia lv6">
+          <header class="m-head">
+            <h3 class="m-name">Unholy Tower Floor 151-160</h3>
+            <span class="m-id">#8316001</span>
+          </header>
+          <div class="m-stats">
+            <span class="stat" title="Vagues"><b>10</b> vagues</span>
+            <span class="stat" title="Ennemis au total"><b>36</b> ennemis</span>
+            <span class="stat energy" title="Énergie"><b>25</b> én.</span>
+          </div>
+          <div class="foes"><span class="foe">Rantoul</span><span class="foe">Polevik</span><span class="foe">Pirate Verica</span><span class="foe">Salamander</span><span class="foe">Thief Leon</span><span class="foe">Sage Mimir</span><span class="foe more">+30</span></div>
+        </article><article class="mission" data-s="unholy tower floor 161-170 unholy tower - dark side - 8317001 trent aero bandit zaza salamander thief leon head thief leon earth idol light idol">
+          <header class="m-head">
+            <h3 class="m-name">Unholy Tower Floor 161-170</h3>
+            <span class="m-id">#8317001</span>
+          </header>
+          <div class="m-stats">
+            <span class="stat" title="Vagues"><b>10</b> vagues</span>
+            <span class="stat" title="Ennemis au total"><b>31</b> ennemis</span>
+            <span class="stat energy" title="Énergie"><b>30</b> én.</span>
+          </div>
+          <div class="foes"><span class="foe">Trent</span><span class="foe">Aero</span><span class="foe">Bandit Zaza</span><span class="foe">Salamander</span><span class="foe">Thief Leon</span><span class="foe">Head Thief Leon</span><span class="foe more">+25</span></div>
+        </article><article class="mission" data-s="unholy tower floor 171-180 unholy tower - dark side - 8318001 water pot thunder pot aero sage mimir priestess maria cursed estia lv8 salamander thief leon">
+          <header class="m-head">
+            <h3 class="m-name">Unholy Tower Floor 171-180</h3>
+            <span class="m-id">#8318001</span>
+          </header>
+          <div class="m-stats">
+            <span class="stat" title="Vagues"><b>10</b> vagues</span>
+            <span class="stat" title="Ennemis au total"><b>31</b> ennemis</span>
+            <span class="stat energy" title="Énergie"><b>30</b> én.</span>
+          </div>
+          <div class="foes"><span class="foe">Water Pot</span><span class="foe">Thunder Pot</span><span class="foe">Aero</span><span class="foe">Sage Mimir</span><span class="foe">Priestess Maria</span><span class="foe">Cursed Estia Lv8</span><span class="foe more">+25</span></div>
+        </article><article class="mission" data-s="unholy tower floor 181-190 unholy tower - dark side - 8319001 trent archangel bandit zaza cursed water god thunder king cursed estia lv9 salamander thief leon">
+          <header class="m-head">
+            <h3 class="m-name">Unholy Tower Floor 181-190</h3>
+            <span class="m-id">#8319001</span>
+          </header>
+          <div class="m-stats">
+            <span class="stat" title="Vagues"><b>10</b> vagues</span>
+            <span class="stat" title="Ennemis au total"><b>30</b> ennemis</span>
+            <span class="stat energy" title="Énergie"><b>30</b> én.</span>
+          </div>
+          <div class="foes"><span class="foe">Trent</span><span class="foe">Archangel</span><span class="foe">Bandit Zaza</span><span class="foe">Cursed Water God</span><span class="foe">Thunder King</span><span class="foe">Cursed Estia Lv9</span><span class="foe more">+24</span></div>
+        </article><article class="mission" data-s="unholy tower floor 191-200 unholy tower - dark side - 8320001 trent skeleton king redcap salamander aero sylph rantoul lilin">
+          <header class="m-head">
+            <h3 class="m-name">Unholy Tower Floor 191-200</h3>
+            <span class="m-id">#8320001</span>
+          </header>
+          <div class="m-stats">
+            <span class="stat" title="Vagues"><b>10</b> vagues</span>
+            <span class="stat" title="Ennemis au total"><b>36</b> ennemis</span>
+            <span class="stat energy" title="Énergie"><b>35</b> én.</span>
+          </div>
+          <div class="foes"><span class="foe">Trent</span><span class="foe">Skeleton King</span><span class="foe">Redcap</span><span class="foe">Salamander</span><span class="foe">Aero</span><span class="foe">Sylph</span><span class="foe more">+30</span></div>
+        </article></div>
+    </section><section class="zone" data-zone="leon&#x27;s deception">
+      <div class="z-head"><h2>Leon&#x27;s Deception</h2><span class="z-count">3</span></div>
+      <div class="grid"><article class="mission" data-s="band of thieves leon&#x27;s deception 8311002 thief henchman unicorn goblin ally redcap ally thief assassin rogue healer">
+          <header class="m-head">
+            <h3 class="m-name">Band of Thieves</h3>
+            <span class="m-id">#8311002</span>
+          </header>
+          <div class="m-stats">
+            <span class="stat" title="Vagues"><b>5</b> vagues</span>
+            <span class="stat" title="Ennemis au total"><b>20</b> ennemis</span>
+            <span class="stat energy" title="Énergie"><b>15</b> én.</span>
+          </div>
+          <div class="foes"><span class="foe">Thief Henchman</span><span class="foe">Unicorn</span><span class="foe">Goblin Ally</span><span class="foe">Redcap Ally</span><span class="foe">Thief Assassin</span><span class="foe">Rogue Healer</span><span class="foe more">+14</span></div>
+        </article><article class="mission" data-s="undaunted uprising leon&#x27;s deception 8312002 thief henchman unicorn redcap ally thief assassin enslaved minotaur enslaved jewel god thief leon&#x27;s double">
+          <header class="m-head">
+            <h3 class="m-name">Undaunted Uprising</h3>
+            <span class="m-id">#8312002</span>
+          </header>
+          <div class="m-stats">
+            <span class="stat" title="Vagues"><b>5</b> vagues</span>
+            <span class="stat" title="Ennemis au total"><b>22</b> ennemis</span>
+            <span class="stat energy" title="Énergie"><b>20</b> én.</span>
+          </div>
+          <div class="foes"><span class="foe">Thief Henchman</span><span class="foe">Unicorn</span><span class="foe">Redcap Ally</span><span class="foe">Thief Assassin</span><span class="foe">Enslaved Minotaur</span><span class="foe">Enslaved Jewel God</span><span class="foe more">+16</span></div>
+        </article><article class="mission" data-s="the reign over agni leon&#x27;s deception 8313002 thief henchman rogue priestess thief assassin enslaved minotaur enslaved jewel god unicorn great thief leon">
+          <header class="m-head">
+            <h3 class="m-name">The Reign Over Agni</h3>
+            <span class="m-id">#8313002</span>
+          </header>
+          <div class="m-stats">
+            <span class="stat" title="Vagues"><b>5</b> vagues</span>
+            <span class="stat" title="Ennemis au total"><b>21</b> ennemis</span>
+            <span class="stat energy" title="Énergie"><b>25</b> én.</span>
+          </div>
+          <div class="foes"><span class="foe">Thief Henchman</span><span class="foe">Rogue Priestess</span><span class="foe">Thief Assassin</span><span class="foe">Enslaved Minotaur</span><span class="foe">Enslaved Jewel God</span><span class="foe">Unicorn</span><span class="foe more">+15</span></div>
+        </article></div>
+    </section><section class="zone" data-zone="xe prologue">
+      <div class="z-head"><h2>XE Prologue</h2><span class="z-count">2</span></div>
+      <div class="grid"><article class="mission" data-s="lost innocence xe prologue 8322001 mandragora sylph sky boss grafl thunder crystal goblin thief leon salamander harpy">
+          <header class="m-head">
+            <h3 class="m-name">Lost Innocence</h3>
+            <span class="m-id">#8322001</span>
+          </header>
+          <div class="m-stats">
+            <span class="stat" title="Vagues"><b>7</b> vagues</span>
+            <span class="stat" title="Ennemis au total"><b>21</b> ennemis</span>
+            <span class="stat energy" title="Énergie"><b>25</b> én.</span>
+          </div>
+          <div class="foes"><span class="foe">Mandragora</span><span class="foe">Sylph</span><span class="foe">Sky Boss Grafl</span><span class="foe">Thunder Crystal</span><span class="foe">Goblin</span><span class="foe">Thief Leon</span><span class="foe more">+15</span></div>
+        </article><article class="mission" data-s="duo of virtue xe prologue 8323001 angel maria light pot polevik salamander head thief leon miracle bulb al-mi&#x27;raj full burst frog">
+          <header class="m-head">
+            <h3 class="m-name">Duo of Virtue</h3>
+            <span class="m-id">#8323001</span>
+          </header>
+          <div class="m-stats">
+            <span class="stat" title="Vagues"><b>7</b> vagues</span>
+            <span class="stat" title="Ennemis au total"><b>20</b> ennemis</span>
+            <span class="stat energy" title="Énergie"><b>35</b> én.</span>
+          </div>
+          <div class="foes"><span class="foe">Angel Maria</span><span class="foe">Light Pot</span><span class="foe">Polevik</span><span class="foe">Salamander</span><span class="foe">Head Thief Leon</span><span class="foe">Miracle Bulb</span><span class="foe more">+14</span></div>
+        </article></div>
+    </section><section class="zone" data-zone="trial of the gods">
+      <div class="z-head"><h2>Trial of the Gods</h2><span class="z-count">3</span></div>
+      <div class="grid"><article class="mission" data-s="trial 01 - burning desire trial of the gods 8380000 beast king zegar moody gloomy brute mossy mender squirty mad king burny">
+          <header class="m-head">
+            <h3 class="m-name">Trial 01 - Burning Desire</h3>
+            <span class="m-id">#8380000</span>
+          </header>
+          <div class="m-stats">
+            <span class="stat" title="Vagues"><b>3</b> vagues</span>
+            <span class="stat" title="Ennemis au total"><b>5</b> ennemis</span>
+            <span class="stat energy" title="Énergie"><b>25</b> én.</span>
+          </div>
+          <div class="foes"><span class="foe">Beast King Zegar</span><span class="foe">Moody Gloomy</span><span class="foe">Brute Mossy</span><span class="foe">Mender Squirty</span><span class="foe">Mad King Burny</span></div>
+        </article><article class="mission" data-s="trial 02 - destructive force trial of the gods 8381000 fallen general weiss holy empress luna ryujin mifune juggernaut">
+          <header class="m-head">
+            <h3 class="m-name">Trial 02 - Destructive Force</h3>
+            <span class="m-id">#8381000</span>
+          </header>
+          <div class="m-stats">
+            <span class="stat" title="Vagues"><b>3</b> vagues</span>
+            <span class="stat" title="Ennemis au total"><b>4</b> ennemis</span>
+            <span class="stat energy" title="Énergie"><b>25</b> én.</span>
+          </div>
+          <div class="foes"><span class="foe">Fallen General Weiss</span><span class="foe">Holy Empress Luna</span><span class="foe">Ryujin Mifune</span><span class="foe">Juggernaut</span></div>
+        </article><article class="mission" data-s="trial 03 - ultimate defense trial of the gods 8382000 god atro death magress psycho mage claris demon abaddon">
+          <header class="m-head">
+            <h3 class="m-name">Trial 03 - Ultimate Defense</h3>
+            <span class="m-id">#8382000</span>
+          </header>
+          <div class="m-stats">
+            <span class="stat" title="Vagues"><b>3</b> vagues</span>
+            <span class="stat" title="Ennemis au total"><b>4</b> ennemis</span>
+            <span class="stat energy" title="Énergie"><b>25</b> én.</span>
+          </div>
+          <div class="foes"><span class="foe">God Atro</span><span class="foe">Death Magress</span><span class="foe">Psycho Mage Claris</span><span class="foe">Demon Abaddon</span></div>
+        </article></div>
+    </section><section class="zone" data-zone="the keymaster&#x27;s eclipse ">
+      <div class="z-head"><h2>The Keymaster&#x27;s Eclipse </h2><span class="z-count">2</span></div>
+      <div class="grid"><article class="mission" data-s="the keymaster&#x27;s eclipse lv. 1 the keymaster&#x27;s eclipse  83510001 skeleton angel medusa lilin goblin thief leon salamander brawler nemia">
+          <header class="m-head">
+            <h3 class="m-name">The Keymaster&#x27;s Eclipse Lv. 1</h3>
+            <span class="m-id">#83510001</span>
+          </header>
+          <div class="m-stats">
+            <span class="stat" title="Vagues"><b>7</b> vagues</span>
+            <span class="stat" title="Ennemis au total"><b>22</b> ennemis</span>
+            <span class="stat energy" title="Énergie"><b>20</b> én.</span>
+          </div>
+          <div class="foes"><span class="foe">Skeleton</span><span class="foe">Angel</span><span class="foe">Medusa</span><span class="foe">Lilin</span><span class="foe">Goblin</span><span class="foe">Thief Leon</span><span class="foe more">+16</span></div>
+        </article><article class="mission" data-s="the keymaster&#x27;s eclipse lv. 2 the keymaster&#x27;s eclipse  83520001 archangel sage mimir priestess maria trent bandit zaza god arm galant frost queen stya dragoon zephu">
+          <header class="m-head">
+            <h3 class="m-name">The Keymaster&#x27;s Eclipse Lv. 2</h3>
+            <span class="m-id">#83520001</span>
+          </header>
+          <div class="m-stats">
+            <span class="stat" title="Vagues"><b>7</b> vagues</span>
+            <span class="stat" title="Ennemis au total"><b>22</b> ennemis</span>
+            <span class="stat energy" title="Énergie"><b>35</b> én.</span>
+          </div>
+          <div class="foes"><span class="foe">Archangel</span><span class="foe">Sage Mimir</span><span class="foe">Priestess Maria</span><span class="foe">Trent</span><span class="foe">Bandit Zaza</span><span class="foe">God Arm Galant</span><span class="foe more">+16</span></div>
+        </article></div>
+    </section>
+  <p class="empty" id="empty">Aucune mission ne correspond à « <b id="qe"></b> ».</p>
+  <footer>Généré depuis cheahjs (missions.json · missions_parsed · info.json) — positions générées en formation. Les ~2900 autres missions (events récents) n'ont pas de données de vagues.</footer>
+</div>
+
+<script>
+(function(){
+  const q=document.getElementById('q'), count=document.getElementById('count'),
+        empty=document.getElementById('empty'), qe=document.getElementById('qe'),
+        missions=[...document.querySelectorAll('.mission')],
+        zonesEls=[...document.querySelectorAll('.zone')];
+  const total=missions.length;
+  function render(){
+    const term=q.value.trim().toLowerCase();
+    let shown=0;
+    missions.forEach(m=>{
+      const ok = !term || m.dataset.s.includes(term);
+      m.style.display = ok ? '' : 'none';
+      if(ok) shown++;
+    });
+    zonesEls.forEach(z=>{
+      const any=[...z.querySelectorAll('.mission')].some(m=>m.style.display!=='none');
+      z.style.display=any?'':'none';
+    });
+    empty.style.display = shown ? 'none' : 'block';
+    qe.textContent=q.value;
+    count.textContent = term ? (shown+' / '+total+' missions affichées') : (total+' missions — tape pour filtrer');
+  }
+  q.addEventListener('input', render); render();
+})();
+</script>
